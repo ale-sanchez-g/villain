@@ -27,7 +27,13 @@ This will simply return a JSON payload with covid19 like below
         "id": 1,
         "type": "covid19",
         "displayName": "CORONA",
-        "img": "covid19.jpg"
+        "images": [
+            {
+                "id": 1,
+                "name": "covid19_1.jpg",
+                "credit": "https://unsplash.com/@cdc"
+            },
+        ]
     }
 ]
 ```
