@@ -64,6 +64,7 @@ artifacts/
 # StyleCop.DS_Store
 StyleCopReport.xml
 .DS_Store
+app/.DS_Store
 
 # Files built by Visual Studio
 *_i.c
