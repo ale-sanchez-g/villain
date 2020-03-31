@@ -1,0 +1,30 @@
+{
+  "name": "villain",
+  "version": "1.0.0",
+  "description": "covid19 game villain",
+  "main": "index.js",
+  "engines": {
+    "node": "10.x"
+  },
+  "scripts": {
+    "start": "node app/index.js $PORT",
+    "test": "docker run -i loadimpact/k6 run - <test/k6.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ale-sanchez-g/villain.git"
+  },
+  "keywords": [
+    "covid19",
+    "game"
+  ],
+  "author": "alejandro sanchez giraldo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ale-sanchez-g/villain/issues"
+  },
+  "homepage": "https://github.com/ale-sanchez-g/villain#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
