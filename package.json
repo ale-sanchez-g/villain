@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node app/index.js $PORT",
     "test": "k6 run -e MY_HOSTNAME=http://localhost:3000 test/k6.spec.js",
-    "exttest": "docker run -i loadimpact/k6 run -e MY_HOSTNAME=https://supervillain.herokuapp.com/ - <test/k6.spec.js"
+    "exttest": "docker run -i loadimpact/k6 run -e MY_HOSTNAME=https://supervillain.herokuapp.com - <test/k6.spec.js"
   },
   "repository": {
     "type": "git",
