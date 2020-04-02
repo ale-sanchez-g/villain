@@ -61,8 +61,10 @@ project.lock.json
 project.fragment.lock.json
 artifacts/
 
-# StyleCop
+# StyleCop.DS_Store
 StyleCopReport.xml
+.DS_Store
+app/.DS_Store
 
 # Files built by Visual Studio
 *_i.c
