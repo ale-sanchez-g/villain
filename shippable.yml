@@ -15,11 +15,11 @@
     before_script:
       - mkdir -p shippable/testresults
       - mkdir -p shippable/codecoverage
-      - psql -c "CREATE ROLE api_user WITH LOGIN PASSWORD 'password';" -U postgres
+      - psql -c "CREATE ROLE api_user WITH superuser';" -U postgres
       - psql -c "ALTER ROLE api_user CREATEDB;" -U postgres
       - psql -c "CREATE DATABASE users_api;" -U api_user
       - psql -c "CREATE TABLE leaderboard ( USER_ID serial PRIMARY KEY, USERNAME VARCHAR (50) UNIQUE NOT NULL, SCORE integer NOT NULL );" -U api_user
-      
+
     build:
       ci:
         - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
