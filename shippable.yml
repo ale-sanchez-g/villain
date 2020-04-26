@@ -17,7 +17,7 @@
       - mkdir -p shippable/codecoverage
       - psql -c "CREATE ROLE api_user WITH superuser;" -U postgres
       - psql -c "CREATE DATABASE users_api;" -U postgres
-      - psql -c "CREATE TABLE leaderboard ( USER_ID serial PRIMARY KEY, USERNAME VARCHAR (50) UNIQUE NOT NULL, SCORE integer NOT NULL );" -U api_user
+      - psql -c "CREATE TABLE leaderboard ( USER_ID serial PRIMARY KEY, USERNAME VARCHAR (50) UNIQUE NOT NULL, SCORE integer NOT NULL );" -U postgres
 
     build:
       ci:
