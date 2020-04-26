@@ -25,5 +25,5 @@
         - sudo apt-get update
         - sudo apt-get install k6
         - npm install
-        - ISCI=true ELEPHANT_URL=postgresql://postgres@0.0.0.0:5432/user_api PORT=3000 npm start &
+        - NODE_ENV=production ELEPHANT_URL=postgresql://postgres@0.0.0.0:5432/user_api PORT=3000 npm start &
         - npm test
