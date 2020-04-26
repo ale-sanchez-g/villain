@@ -30,9 +30,9 @@ const getUser = (request, response) => {
   }
   
   const addUser = (request, response) => {
-    const { user, score } = request.body
+    const { username, score } = request.body
   
-    pool.query('INSERT INTO leaderboard (user, score) VALUES ($1, $2)', [user, score], error => {
+    pool.query('INSERT INTO leaderboard (username, score) VALUES ($1, $2)', [username, score], error => {
       if (error) {
         throw error
       }
