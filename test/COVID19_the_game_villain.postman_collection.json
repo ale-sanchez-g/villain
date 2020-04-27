@@ -61,6 +61,18 @@
 				},
 				{
 					"name": "Add a new user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d39ecf88-1f75-4880-8650-04be9fa376f1",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -74,7 +86,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"test\",\n    \"score\": 100\n}"
+							"raw": "{\n    \"username\": \"{{$randomNoun}}\",\n    \"score\": 100\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/v1/user",
