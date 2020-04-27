@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "23be5af0-229c-4f77-ba4e-d8aab6e1e066",
-		"name": "COVID19 the game - villain",
+		"_postman_id": "fd78c084-4085-47f3-8583-61f2b90ca290",
+		"name": "COVID19_the_game_villain",
 		"description": "This is a sample nodejs express server.\n\nContact Support:\n Name: COVID19 The gaes APIs Support\n Email: morisidivine@gmail.com",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -18,11 +18,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/user",
+							"raw": "{{baseUrl}}/v1/user",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
+								"v1",
 								"user"
 							]
 						},
@@ -76,11 +77,12 @@
 							"raw": "{\n    \"username\": \"test\",\n    \"score\": 100\n}"
 						},
 						"url": {
-							"raw": "{{baseUrl}}/user",
+							"raw": "{{baseUrl}}/v1/user",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
+								"v1",
 								"user"
 							]
 						}
