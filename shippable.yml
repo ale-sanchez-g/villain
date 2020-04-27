@@ -19,10 +19,6 @@
       - psql -U postgres -d users_api -c "CREATE TABLE leaderboard ( USER_ID serial PRIMARY KEY, USERNAME VARCHAR (50) UNIQUE NOT NULL, SCORE integer NOT NULL );"
 
     ci:
-      - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
-      - echo "deb https://dl.bintray.com/loadimpact/deb stable main" | sudo tee -a /etc/apt/sources.list
-      - sudo apt-get update
-      - sudo apt-get install k6
       - npm install
       - PORT=3000 npm start &
       - npm test
