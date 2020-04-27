@@ -118,6 +118,55 @@
 							"body": ""
 						}
 					]
+				},
+				{
+					"name": "Opens api docs",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api-docs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api-docs"
+							]
+						},
+						"description": "The users are returned in a array in DES score order."
+					},
+					"response": [
+						{
+							"name": "A JSON array of user names",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n {\n  \"username\": \"<string>\",\n  \"score\": \"<integer>\"\n },\n {\n  \"username\": \"<string>\",\n  \"score\": \"<integer>\"\n }\n]"
+						}
+					]
 				}
 			],
 			"protocolProfileBehavior": {}
