@@ -17,8 +17,10 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 
+// The below routes are for swagger documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+// TODO: move the below into a separate V1 controller *********************************************
 const getUser = (request, response) => {
     pool.query('SELECT * FROM leaderboard ORDER BY score DESC', (error, results) => {
       if (error) {
@@ -40,7 +42,9 @@ const getUser = (request, response) => {
       console.log('user added successfully')
     })
   }
+// *********************************************
 
+// Creates multiple methods for the same route
 app
   .route('/v1/user')
   // GET endpoint

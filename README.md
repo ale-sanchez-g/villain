@@ -1,5 +1,9 @@
 # Villain
 
+[![Run Status](https://api.shippable.com/projects/5e83cdedebc09700078657b9/badge?branch=master)]()
+
+<img src="http://online.swagger.io/validator?url=https://raw.githubusercontent.com/ale-sanchez-g/villain/issue_5_create_player/app/swagger/openapi.json">
+
 The purpose of the villain API is to provide users and score functionality. The API is run on nodejs express hosted in Heroku and connects to an ElephantSQL postgress DB.
 
 ## Requirements
