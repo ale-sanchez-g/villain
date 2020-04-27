@@ -1,4 +1,0 @@
-- psql -c "CREATE ROLE api_user WITH LOGIN PASSWORD 'password';" -U postgres
-- psql -c "ALTER ROLE api_user CREATEDB;" -U postgres
-- psql -c "CREATE DATABASE books_api;" -U postgress
-- psql -c "CREATE TABLE books ( ID SERIAL PRIMARY KEY, author VARCHAR(255) NOT NULL, title VARCHAR(255) NOT NULL );" -U postgress

@@ -15,15 +15,14 @@
     before_script:
       - mkdir -p shippable/testresults
       - mkdir -p shippable/codecoverage
-      - psql -c "CREATE ROLE api_user WITH superuser;" -U postgres
       - psql -c "CREATE DATABASE users_api;" -U postgres
-      - psql -c "CREATE TABLE leaderboard ( USER_ID serial PRIMARY KEY, USERNAME VARCHAR (50) UNIQUE NOT NULL, SCORE integer NOT NULL );" -U postgres
-    build:
+      - psql -U postgres -d users_api -c "CREATE TABLE leaderboard ( USER_ID serial PRIMARY KEY, USERNAME VARCHAR (50) UNIQUE NOT NULL, SCORE integer NOT NULL );"
+    build:psql -U postgres -d your_database_name
       ci:
         - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
         - echo "deb https://dl.bintray.com/loadimpact/deb stable main" | sudo tee -a /etc/apt/sources.list
         - sudo apt-get update
         - sudo apt-get install k6
         - npm install
-        - NODE_ENV=production ELEPHANT_URL=postgresql://postgres@0.0.0.0:5432/user_api PORT=3000 npm start &
+        - PORT=3000 npm start &
         - npm test
