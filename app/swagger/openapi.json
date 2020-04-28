@@ -1,0 +1,80 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "COVID19 the game - villain",
+    "description": "This is a sample nodejs express server.",
+    "contact": {
+      "name": "COVID19 The gaes APIs Support",
+      "email": "morisidivine@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/ale-sanchez-g/villain/blob/master/LICENSE"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://supervillain.herokuapp.com/v1",
+      "description": "Main (production) server"
+    }
+  ],
+  "paths": {
+    "/user": {
+      "get": {
+        "summary": "Returns a list of users.",
+        "description": "The users are returned in a array in DES score order.",
+        "responses": {
+          "200": {
+            "description": "A JSON array of user names",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "username": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new user",
+        "requestBody": {
+          "description": "Adds a new user to the leaderboard",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "score": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    }
+  }
+}

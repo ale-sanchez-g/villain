@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "node app/index.js $PORT",
-    "test": "k6 run -e MY_HOSTNAME=http://localhost:3000 test/k6.spec.js",
+    "test": "node_modules/.bin/newman run test/COVID19_the_game_villain.postman_collection.json --env-var baseUrl=http://localhost:3000",
+    "perf:test": "k6 run -e MY_HOSTNAME=http://localhost:3000 test/k6.spec.js",
     "e2etest": "docker run -i loadimpact/k6 run -e MY_HOSTNAME=https://supervillain.herokuapp.com - <test/k6.spec.js"
   },
   "repository": {
@@ -26,6 +27,13 @@
   },
   "homepage": "https://github.com/ale-sanchez-g/villain#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "swagger-ui-express": "^4.1.4",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "pg": "^8.0.3"
+  },
+  "devDependencies": {
+    "newman": "^5.0.0"
   }
 }
