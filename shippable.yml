@@ -13,8 +13,7 @@
     
     env:
       global:
-        - secure: gye/F6PFtc51kq7hQAPsMxQNNjVB4ybj4X6oZ7IwxBf/JJ1HsI5DyVwLJwiDOKEPUVJzDFbHelweLSK1r8Jc/oaIwxBglh3SqCueE+ltws2lixB6aSACwZjhWnMioGO5vr784cRIyJ9Pi3U/ElECaqe7MmaotwsKQvoLDcj/U3o7PdOf/yZ/UMZuuRTHQNE0k+5U+5FyRyEQFQ3Lmev9WpNYPItm1gDfsqsczU366UEf4HfK72aRa5hocY0aC8HJUcnKaXqU66UBXMmRq6ZPry7gFJttJey3nMfxNj0z/OUlOXWHmw7dijd5xBTzroG9jBQEQC6O8h7jbPjg5D3meg==
-
+        - secure: ZNBIkLeY5uUsEcn0Tg2DAnoVoQ8ArJz+jfrAHeLDftoiA7jXJ9PQJUyIfDFYsbI7MyEUeSbyj6NCY335/nEbxgpOlH4YSA78R52J1H4o8bzHU03ExnIifO1rx+a0iRwDbNK7WNNVFLH2GVNDQx+MQKkq/3nfupTTuXKI5XC08K3kY7jBOPybvDfDu/1BJbkHKWwtRPIzNmDF7s3jnJs3/bBrRMJIecC5AfekZbci7DAqTRd9aTTScVmBPke8G3wA0V9/wxst11RWw7b3WlKH07nKxKFNikAoM5TVDcn/krve888xDuz1LByI0ZLMNTjA2VBNcZWqiBGyxXx9pM9fVg==
     # Create directories for test and coverage reports
     before_script:
       - mkdir -p shippable/testresults
