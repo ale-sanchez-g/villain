@@ -17,6 +17,10 @@
       - mkdir -p shippable/codecoverage
       - psql -c "CREATE DATABASE users_api;" -U postgres
       - psql -U postgres -d users_api -c "CREATE TABLE leaderboard ( USER_ID serial PRIMARY KEY, USERNAME VARCHAR (50) UNIQUE NOT NULL, SCORE integer NOT NULL );"
+      - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
+      - echo "deb https://dl.bintray.com/loadimpact/deb stable main" | sudo tee -a /etc/apt/sources.list
+      - sudo apt-get update
+      - sudo apt-get install k6
     build:  
       ci:
         - npm install
