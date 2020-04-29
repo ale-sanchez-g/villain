@@ -169,9 +169,7 @@
 							"script": {
 								"id": "6c652dbb-9901-47c4-8578-dd002ee44dd0",
 								"exec": [
-									"let r = Math.random().toString(36).substring(7);",
-									"",
-									"pm.environment.set(\"username\", r);"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -181,8 +179,8 @@
 							"script": {
 								"id": "797d4133-2d07-4dd3-9ed6-817731ab19a6",
 								"exec": [
-									"pm.test(\"Status code is 201\", function () {",
-									"    pm.response.to.have.status(201);",
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
 									"});"
 								],
 								"type": "text/javascript"
