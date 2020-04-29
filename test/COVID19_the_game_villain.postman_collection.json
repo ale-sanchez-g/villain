@@ -11,6 +11,20 @@
 			"item": [
 				{
 					"name": "Returns a list of users.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "71125a5a-a320-48d0-854a-b57354282897",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -65,9 +79,23 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "d39ecf88-1f75-4880-8650-04be9fa376f1",
+								"id": "19be3164-e9ce-4120-8f47-b9d6a6242060",
 								"exec": [
-									""
+									"let r = Math.random().toString(36).substring(7);",
+									"",
+									"pm.environment.set(\"username\", r);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "31219d6a-ae8e-476a-a383-e385479e9ce2",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -86,7 +114,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"{{$randomNoun}}\",\n    \"score\": 100\n}"
+							"raw": "{\n    \"username\": \"{{username}}\",\n    \"score\": 100\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/v1/user",
@@ -134,7 +162,62 @@
 					]
 				},
 				{
+					"name": "Update user score",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a27c7a49-d764-4794-a3b0-a286c89f6c52",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{username}}\",\n    \"score\": 200\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Opens api docs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f2cfdcc9-8384-4a65-a0a4-d2bc170cfe88",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "noauth"

@@ -74,6 +74,33 @@
             "description": "Created"
           }
         }
+      },
+      "put": {
+        "summary": "Update user",
+        "requestBody": {
+          "description": "updates user",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "score": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Updated"
+          }
+        }
       }
     }
   }
