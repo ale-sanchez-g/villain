@@ -22,3 +22,7 @@
         - npm install
         - PORT=3000 npm start &
         - npm test
+        - npm run perf:test
+      on_success:
+        - chmod u+x setup/dbTearDown.sh
+        - ./setup/dbTearDown.sh
