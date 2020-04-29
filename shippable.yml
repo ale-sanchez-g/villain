@@ -10,6 +10,10 @@
     
     services:
       - postgres
+    
+    env:
+      global:
+        - secure: gye/F6PFtc51kq7hQAPsMxQNNjVB4ybj4X6oZ7IwxBf/JJ1HsI5DyVwLJwiDOKEPUVJzDFbHelweLSK1r8Jc/oaIwxBglh3SqCueE+ltws2lixB6aSACwZjhWnMioGO5vr784cRIyJ9Pi3U/ElECaqe7MmaotwsKQvoLDcj/U3o7PdOf/yZ/UMZuuRTHQNE0k+5U+5FyRyEQFQ3Lmev9WpNYPItm1gDfsqsczU366UEf4HfK72aRa5hocY0aC8HJUcnKaXqU66UBXMmRq6ZPry7gFJttJey3nMfxNj0z/OUlOXWHmw7dijd5xBTzroG9jBQEQC6O8h7jbPjg5D3meg==
 
     # Create directories for test and coverage reports
     before_script:
@@ -24,9 +28,6 @@
     build:  
       ci:
         - npm install
-        - PORT=3000 npm start &
+        - NODE_ENV=production PORT=3000 npm start & >> app.log
         - npm test
         - npm run perf:test
-      on_success:
-        - chmod u+x setup/dbTearDown.sh
-        - ./setup/dbTearDown.sh
