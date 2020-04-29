@@ -3,6 +3,7 @@ const { pool } = require('../config')
 const getUser = (request, response) => {
     pool.query('SELECT * FROM leaderboard ORDER BY score DESC', (error, results) => {
       if (error) {
+        console.log(error.stack)
         response.status(400)
         response.json({error: error.stack})
         } else {
@@ -17,6 +18,7 @@ const addUser = (request, response, next) => {
 
     pool.query('INSERT INTO leaderboard (username, score) VALUES ($1, $2)', [username, score], error => {
         if (error) {
+          console.log(error.stack)
           response.status(400)
           response.json({error: error.stack})
           } else {
@@ -31,6 +33,7 @@ const updateUser = (request, response) => {
 
     pool.query('UPDATE leaderboard SET score = $2 WHERE username = $1', [username, score], error => {
         if (error) {
+          console.log(error.stack)
           response.status(400)
           response.json({error: error.stack})
         } else {
