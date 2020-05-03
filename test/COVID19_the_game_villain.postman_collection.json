@@ -32,9 +32,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/v1/user",
+							"raw": "{{url}}/v1/user",
 							"host": [
-								"{{baseUrl}}"
+								"{{url}}"
 							],
 							"path": [
 								"v1",
@@ -117,9 +117,9 @@
 							"raw": "{\n    \"username\": \"{{username}}\",\n    \"score\": 100\n}"
 						},
 						"url": {
-							"raw": "{{baseUrl}}/v1/user",
+							"raw": "{{url}}/v1/user",
 							"host": [
-								"{{baseUrl}}"
+								"{{url}}"
 							],
 							"path": [
 								"v1",
@@ -203,9 +203,9 @@
 							"raw": "{\n    \"username\": \"{{username}}\",\n    \"score\": 100\n}"
 						},
 						"url": {
-							"raw": "{{baseUrl}}/v1/user",
+							"raw": "{{url}}/v1/user",
 							"host": [
-								"{{baseUrl}}"
+								"{{url}}"
 							],
 							"path": [
 								"v1",
@@ -276,9 +276,62 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/v1/user",
+							"raw": "{{url}}/v1/user",
 							"host": [
-								"{{baseUrl}}"
+								"{{url}}"
+							],
+							"path": [
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add user with put",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "03d3a0d8-8197-4d95-8479-8a73594d6f2d",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "4f299edf-4f8b-4874-be95-8ec68c3913a8",
+								"exec": [
+									"let r = Math.random().toString(36).substring(7);",
+									"",
+									"pm.environment.set(\"username_new\", r);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{username_new}}\",\n    \"score\": 200\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/v1/user",
+							"host": [
+								"{{url}}"
 							],
 							"path": [
 								"v1",
@@ -311,9 +364,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api-docs",
+							"raw": "{{url}}/api-docs",
 							"host": [
-								"{{baseUrl}}"
+								"{{url}}"
 							],
 							"path": [
 								"api-docs"

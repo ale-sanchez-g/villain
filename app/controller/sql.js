@@ -13,7 +13,7 @@ const getUser = (request, response) => {
     })
   }
   
-const addUser = (request, response, next) => {
+const addUser = (request, response) => {
     const { username, score } = request.body
 
     pool.query('INSERT INTO leaderboard (username, score) VALUES ($1, $2)', [username, score], error => {
@@ -31,13 +31,14 @@ const addUser = (request, response, next) => {
 const updateUser = (request, response) => {
     const { username, score } = request.body
 
-    pool.query('UPDATE leaderboard SET score = $2 WHERE username = $1', [username, score], error => {
-        if (error) {
-          console.log(error.stack)
-          response.status(400)
-          response.json({error: error.stack})
+    pool.query('UPDATE leaderboard SET score = $2 WHERE username = $1', [username, score], (error, result) => {
+        if (result.rowCount == 0) {
+            pool.query('INSERT INTO leaderboard (username, score) VALUES ($1, $2)', [username, score], error => {
+            response.status(201).json({ status: 'success', message: 'User added with updated score' })
+          })
         } else {
-          response.status(204).json({ status: 'success', message: 'User updates.' })
+          response.status(204)
+          response.json()
           console.log('user updated successfully')
         }
     })

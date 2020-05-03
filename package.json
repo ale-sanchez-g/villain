@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node app/index.js $PORT",
-    "test": "node_modules/.bin/newman run test/COVID19_the_game_villain.postman_collection.json --env-var baseUrl=http://localhost:3000",
+    "test": "node_modules/.bin/newman run test/COVID19_the_game_villain.postman_collection.json --env-var url=http://localhost:3000",
     "perf:test": "k6 run --quiet -e MY_HOSTNAME=http://localhost:3000 test/k6.spec.js",
     "e2etest": "docker run -i loadimpact/k6 run --quiet -e MY_HOSTNAME=https://supervillain.herokuapp.com - <test/k6.spec.js"
   },
