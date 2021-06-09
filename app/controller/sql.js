@@ -26,7 +26,7 @@ const addUser = (request, response) => {
           console.log('user added successfully')
         }
     })
-}
+  }
 
 const updateUser = (request, response) => {
     const { username, score } = request.body
@@ -42,6 +42,25 @@ const updateUser = (request, response) => {
           console.log('user updated successfully')
         }
     })
-}
+  }
 
-module.exports = { getUser, addUser, updateUser }
+const cleanUsers = (request, response) => {
+  if (request.header("delete-key") == process.env.DEL_KEY) {
+    pool.query('DELETE FROM leaderboard WHERE Score IS NOT NULL', (error, results) => {
+      if (error) {
+          console.log(error.stack)
+          response.status(400)
+          response.json({error: error.stack})
+        } else {
+          response.status(204).json(results.rows)
+          console.log('user list cleaned successfullsy')
+      }
+    });
+  } else {
+    console.log("ERR401-unable-to-authenticate-delete-key")
+    response.status(401)
+    response.json({error: "unable to authenticate key"})
+  }
+  }
+  
+module.exports = { getUser, addUser, updateUser, cleanUsers }

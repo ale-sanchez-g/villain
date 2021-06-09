@@ -37,6 +37,7 @@ open your terminal and follow the below steps
   - windows run `bash ./setup/init.sh`
     - NOTE: Also make sure your shell script is formatted with Unix style, or there can be errors.
 - run `npm install`
+- set `ELEPHANT_URL` variable with the postgress URL of the instance that you what to use
 - run `npm start` or `node app/index.js $PORT`
 - Navigate to <http:localhoat:3000/api-docs> to view the swagger documentaiton of the API
 
