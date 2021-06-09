@@ -29,6 +29,8 @@ app
   .post(controllers.addUser)
   // PUT endpoint
   .put(controllers.updateUser)
+  // DELETE endpoint
+  .delete(controllers.cleanUsers)
 
   app.listen(port, () => {
     console.log(`Server running on port ${port}`);

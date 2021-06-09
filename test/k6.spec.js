@@ -2,8 +2,11 @@ import { group, check } from "k6";
 import http from "k6/http";
 
 export let options = {
-  vus: 5,
-  duration: '30s',
+  stages: [
+    { duration: '30s', target: 20 },
+    { duration: '1m30s', target: 10 },
+    { duration: '20s', target: 0 },
+  ],
 };
 
 export default function() {
@@ -73,6 +76,14 @@ export default function() {
       check(res3, {
         "is status 200": r => r.status === 200,
       });
+    });
+    
+    group('Clean up users', function() {
+      let res4 = http.del(`${__ENV.MY_HOSTNAME}/v1/user`);
+    
+      check(res4, {
+        "is status 401": r => r.status === 401,
       });
+    });  
   });
 }

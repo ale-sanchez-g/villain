@@ -17,6 +17,10 @@
     {
       "url": "https://supervillain.herokuapp.com/v1",
       "description": "Main (production) server"
+    },
+    {
+      "url": "http://localhost:3000/v1",
+      "description": "localhosy server"
     }
   ],
   "paths": {
@@ -135,6 +139,42 @@
         "responses": {
           "204": {
             "description": "Updated"
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete users",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "delete-key",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "delete user has an added header protection as is only for operational support",
+        "responses": {
+          "204": {
+            "description": "Deleted"
           },
           "400": {
             "description": "Invalid request",
