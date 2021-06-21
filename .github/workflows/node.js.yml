@@ -29,4 +29,5 @@ jobs:
     
     - name: JUnit Report Action
       uses: mikepenz/action-junit-report@v2.4.3
-          report_paths: '**/newman/test-results/test/*.xml'
+      with:
+        report_paths: '**/newman/test-results/test/*.xml'
