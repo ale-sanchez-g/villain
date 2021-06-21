@@ -27,3 +27,6 @@ jobs:
     - run: NODE_ENV=production ELEPHANT_URL=${{ secrets.ELEPHANT_URL_TEST}} PORT=3000 npm start & >> app.log & sleep 10
     - run: npm run test
     
+    - name: JUnit Report Action
+      uses: mikepenz/action-junit-report@v2.4.3
+          report_paths: '**/newman/test-results/test/*.xml'
