@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: Build, Test and Performance
 
 on:
   pull_request:
@@ -26,3 +26,4 @@ jobs:
     - run: npm install
     - run: NODE_ENV=production ELEPHANT_URL=${{ secrets.ELEPHANT_URL_TEST}} PORT=3000 npm start & >> app.log & sleep 10
     - run: npm run test
+    - run: npm run perf:test
