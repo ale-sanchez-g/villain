@@ -15,16 +15,15 @@ jobs:
     strategy:
       matrix:
         node-version: [15.x]
+        plan: [test, perf:test]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
+      uses: k6io/action@v0.1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: sudo apt-get install k6
     - run: npm install
     - run: NODE_ENV=production ELEPHANT_URL=${{ secrets.ELEPHANT_URL_TEST}} PORT=3000 npm start & >> app.log & sleep 10
-    - run: npm run test
-    - run: npm run perf:test
+    - run: npm run ${{ matrix.plan }}    
