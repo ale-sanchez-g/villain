@@ -4,8 +4,6 @@
 name: Node.js CI
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -25,5 +23,8 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
+      env:
+        ELEPHANT_URL: ${{ secrets.ELEPHANT_URL_TEST}}
     - run: npm install
-    - run: npm run e2e
+    - run: NODE_ENV=production PORT=3000 npm start & >> app.log
+    - run: npm run test
