@@ -3,19 +3,27 @@ const { pool } = require('../config')
 const jwt = require('jsonwebtoken');
 const tokenKey = 'secret';
 
+const addApp = (request, response) => {
+    const { key } = request.body
 
-function generateToken(appkey) {
-    pool.query('INSERT INTO appkey (app) VALUES ($1)', [appkey.key], error => {
+    pool.query('INSERT INTO appkey (app) VALUES ($1)', [key], error => {
         if (error) {
           console.log(error.stack)
+          response.status(400)
+          response.json({error: error.stack})
           } else {
-            console.log('logging app ' + appkey.key)
-            return {
-                'token' : jwt.sign(appkey, tokenKey, {expiresIn: '3600'}),
-                'expiry': 3600
-            };
+          response.status(200).json(generateToken(key))
+          console.log('App added successfully')
         }
     })
-}
+  }
 
-module.exports = generateToken;
+
+function generateToken(appkey) {
+    return {
+            'token' : jwt.sign(appkey, tokenKey, {expiresIn: '3600'}),
+            'expiry': 3600
+        };
+    }
+
+module.exports = addApp;

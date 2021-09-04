@@ -33,10 +33,9 @@ app
   // DELETE endpoint
   .delete(controllers.cleanUsers)
 
-// Auth fake token
-app.post('/auth/gentoken', (req, res) => {
-    res.status(200).json(auth(req.body));
-})
+app
+  .route('/auth/gentoken')
+  .post(auth.addApp)
 
   app.listen(port, () => {
     console.log(`Server running on port ${port}`);
