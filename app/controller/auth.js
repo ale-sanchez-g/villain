@@ -12,7 +12,7 @@ const addApp = (request, response) => {
           response.status(400)
           response.json({error: error.stack})
           } else {
-          response.status(200).json(generateToken(key))
+          response.status(200).json(generateToken(request.body))
           console.log('App added successfully')
         }
     })
