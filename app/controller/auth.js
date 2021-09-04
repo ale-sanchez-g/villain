@@ -26,4 +26,4 @@ function generateToken(appkey) {
         };
     }
 
-module.exports = addApp;
+module.exports = { addApp };
