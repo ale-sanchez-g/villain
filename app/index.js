@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require('body-parser')
 const cors = require('cors')
 let controllers = require('./controller/sql');
+let auth = require('./controller/auth');
 
 let swaggerUi = require('swagger-ui-express'),
 swaggerDocument = require('./swagger/openapi.json');
@@ -31,6 +32,11 @@ app
   .put(controllers.updateUser)
   // DELETE endpoint
   .delete(controllers.cleanUsers)
+
+// Auth fake token
+app.post('/auth/gentoken', (req, res) => {
+    res.status(200).json(auth(req.body));
+})
 
   app.listen(port, () => {
     console.log(`Server running on port ${port}`);
