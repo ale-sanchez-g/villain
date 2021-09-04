@@ -9,6 +9,7 @@ function generateToken(appkey) {
         if (error) {
           console.log(error.stack)
           } else {
+            console.log('logging app ' + appkey.key)
             return {
                 'token' : jwt.sign(appkey, tokenKey, {expiresIn: '3600'}),
                 'expiry': 3600
