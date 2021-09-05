@@ -1,7 +1,7 @@
 const { pool } = require('../config')
 
 const jwt = require('jsonwebtoken');
-const tokenKey = 'secret';
+const tokenKey = 'secret' || process.env.AUTH_KEY;
 
 const addApp = (request, response) => {
     const { key } = request.body
