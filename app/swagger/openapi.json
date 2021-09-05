@@ -30,7 +30,7 @@
           "description": "Send application Key",
           "required": true,
           "content": {
-            "applications/json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -67,6 +67,74 @@
           },
           "400": {
             "description": "Error from DB proxy to user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/verifytoken": {
+      "get": {
+        "summary": "Verify your token still valid.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorisation",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "JWT validated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string"
+                    },
+                    "iat": {
+                      "type": "integer"
+                    },
+                    "exp": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "App name not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid token",
             "content": {
               "application/json": {
                 "schema": {
