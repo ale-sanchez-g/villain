@@ -34,6 +34,8 @@ const verify = (request, response) => {
                     console.log('App validated successfully')
                   }
             })
+      }
+    })
 }
 
 function generateToken(appkey) {
