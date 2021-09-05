@@ -40,8 +40,8 @@ const verify = (request, response) => {
 
 function generateToken(appkey) {
     return {
-            'token' : jwt.sign(appkey, tokenKey, {expiresIn: '100 years'}),
-            'expiry': '100 years'
+            'token' : jwt.sign(appkey, tokenKey, {expiresIn: '3 days'}),
+            'expiry': '3 days'
         };
     }
 
