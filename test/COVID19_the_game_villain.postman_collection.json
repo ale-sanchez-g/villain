@@ -420,7 +420,7 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
-									"    let payload = pm.response.body;",
+									"    let payload = pm.response.json();",
 									"    pm.environment.set(\"token\", payload.token);",
 									"});"
 								],
@@ -495,7 +495,7 @@
 	],
 	"variable": [
 		{
-			"id": "1e0d63f6-6532-43e7-b615-4712aac563eb",
+			"id": "fa682ee9-f402-46d2-af3f-0e7d22c1758f",
 			"key": "baseUrl",
 			"value": "https://supervillain.herokuapp.com/v1",
 			"type": "string"
