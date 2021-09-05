@@ -38,8 +38,8 @@ app
   .post(auth.addApp)
 
 app
-  .route('/auth/token')
-  .post(auth.verify)
+  .route('/auth/verifytoken')
+  .get(auth.verify)
 
   app.listen(port, () => {
     console.log(`Server running on port http://localhost:${port}`);
