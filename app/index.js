@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require('body-parser')
 const cors = require('cors')
 let controllers = require('./controller/sql');
+let auth = require('./controller/auth');
 
 let swaggerUi = require('swagger-ui-express'),
 swaggerDocument = require('./swagger/openapi.json');
@@ -32,6 +33,14 @@ app
   // DELETE endpoint
   .delete(controllers.cleanUsers)
 
+app
+  .route('/auth/gentoken')
+  .post(auth.addApp)
+
+app
+  .route('/auth/verifytoken')
+  .get(auth.verify)
+
   app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+    console.log(`Server running on port http://localhost:${port}`);
    });

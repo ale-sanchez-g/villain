@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fd78c084-4085-47f3-8583-61f2b90ca290",
+		"_postman_id": "17b00a08-b54d-4db3-9e79-8ac362af50f4",
 		"name": "COVID19_the_game_villain",
 		"description": "This is a sample nodejs express server.\n\nContact Support:\n Name: COVID19 The gaes APIs Support\n Email: morisidivine@gmail.com",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -15,7 +15,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "71125a5a-a320-48d0-854a-b57354282897",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -79,7 +78,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "19be3164-e9ce-4120-8f47-b9d6a6242060",
 								"exec": [
 									"let r = Math.random().toString(36).substring(7);",
 									"",
@@ -91,7 +89,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "31219d6a-ae8e-476a-a383-e385479e9ce2",
 								"exec": [
 									"pm.test(\"Status code is 201\", function () {",
 									"    pm.response.to.have.status(201);",
@@ -167,7 +164,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "6c652dbb-9901-47c4-8578-dd002ee44dd0",
 								"exec": [
 									""
 								],
@@ -177,7 +173,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "797d4133-2d07-4dd3-9ed6-817731ab19a6",
 								"exec": [
 									"pm.test(\"Status code is 400\", function () {",
 									"    pm.response.to.have.status(400);",
@@ -253,7 +248,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "a27c7a49-d764-4794-a3b0-a286c89f6c52",
 								"exec": [
 									"pm.test(\"Status code is 204\", function () {",
 									"    pm.response.to.have.status(204);",
@@ -294,7 +288,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "03d3a0d8-8197-4d95-8479-8a73594d6f2d",
 								"exec": [
 									"pm.test(\"Status code is 201\", function () {",
 									"    pm.response.to.have.status(201);",
@@ -306,7 +299,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "4f299edf-4f8b-4874-be95-8ec68c3913a8",
 								"exec": [
 									"let r = Math.random().toString(36).substring(7);",
 									"",
@@ -347,7 +339,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f2cfdcc9-8384-4a65-a0a4-d2bc170cfe88",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -404,17 +395,110 @@
 						}
 					]
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register app",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let r = Math.random().toString(36).substring(7);",
+									"",
+									"pm.environment.set(\"appname\", r);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    let payload = pm.response.json();",
+									"    pm.environment.set(\"token\", payload.token);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"key\": \"{{appname}}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/gentoken",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"gentoken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate app",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/auth/verifytoken",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"verifytoken"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"variable": [
 		{
-			"id": "baseUrl",
+			"id": "fa682ee9-f402-46d2-af3f-0e7d22c1758f",
 			"key": "baseUrl",
 			"value": "https://supervillain.herokuapp.com/v1",
 			"type": "string"
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

@@ -4,27 +4,154 @@
     "title": "COVID19 the game - villain",
     "description": "This is a sample nodejs express server.",
     "contact": {
-      "name": "COVID19 The gaes APIs Support",
+      "name": "COVID19 The game API Support",
       "email": "morisidivine@gmail.com"
     },
     "license": {
       "name": "MIT",
       "url": "https://github.com/ale-sanchez-g/villain/blob/master/LICENSE"
     },
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "servers": [
     {
-      "url": "https://supervillain.herokuapp.com/v1",
+      "url": "https://supervillain.herokuapp.com",
       "description": "Main (production) server"
     },
     {
-      "url": "http://localhost:3000/v1",
+      "url": "http://localhost:3000",
       "description": "localhosy server"
     }
   ],
   "paths": {
-    "/user": {
+    "/auth/gentoken": {
+      "post": {
+        "requestBody": {
+          "description": "Send application Key",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a token for your app",
+        "responses": {
+          "200": {
+            "description": "Token created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string"
+                    },
+                    "iat": {
+                      "type": "integer"
+                    },
+                    "exp": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error from DB proxy to user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/verifytoken": {
+      "get": {
+        "summary": "Verify your token still valid.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "JWT validated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string"
+                    },
+                    "iat": {
+                      "type": "integer"
+                    },
+                    "exp": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "App name not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/user": {
       "get": {
         "summary": "Returns a list of users.",
         "description": "The users are returned in a array in DES score order.",
