@@ -18,12 +18,33 @@ const addApp = (request, response) => {
     })
   }
 
+const verify = (request, response) => {
+    const token = request.headers.authorization;
+    jwt.verify(token, tokenKey, (error, decoded) => {
+        if (error) {
+            response.status(403).json({error: 'Token Authentication failed ::: ' + error })
+        } else {
+            pool.query('SELECT * FROM appkey WHERE app = $1', [key], error => {
+                if (error) {
+                    console.log(error.stack)
+                    response.status(400)
+                    response.json({error: error.stack})
+                    } else {
+                    response.status(200).json(decoded)
+                    console.log('App validated successfully')
+                  }
+            })
+}
 
 function generateToken(appkey) {
     return {
-            'token' : jwt.sign(appkey, tokenKey, {expiresIn: '3600'}),
-            'expiry': 3600
+            'token' : jwt.sign(appkey, tokenKey, {expiresIn: '3 days'}),
+            'expiry': '3 days'
         };
     }
 
-module.exports = { addApp };
+function verifyToken(token) {
+    return jwt.verify(token, tokenKey);
+}    
+
+module.exports = { addApp, verify, generateToken, verifyToken };
