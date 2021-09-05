@@ -433,7 +433,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"key\": {{appname}}}",
+							"raw": "{\"key\": \"{{appname}}\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -495,7 +495,7 @@
 	],
 	"variable": [
 		{
-			"id": "c13890b9-14ad-4e13-9da1-4aeb950be163",
+			"id": "1e0d63f6-6532-43e7-b615-4712aac563eb",
 			"key": "baseUrl",
 			"value": "https://supervillain.herokuapp.com/v1",
 			"type": "string"
