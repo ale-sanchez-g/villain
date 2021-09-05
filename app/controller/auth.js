@@ -25,7 +25,7 @@ const verify = (request, response) => {
             response.status(403).json({error: 'Token Authentication failed ::: ' + error })
         } else {
             pool.query('SELECT * FROM appkey WHERE app = $1', [decoded.key], (error, results) => {
-                if (error) {
+                if (error || results.rows.length === 0) {
                     console.log(error.stack)
                     response.status(400)
                     response.json({error: error.stack})
