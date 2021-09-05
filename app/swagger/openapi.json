@@ -89,7 +89,7 @@
         "parameters": [
           {
             "in": "header",
-            "name": "Authorisation",
+            "name": "authorization",
             "schema": {
               "type": "string"
             },
