@@ -24,13 +24,13 @@ const verify = (request, response) => {
         if (error) {
             response.status(403).json({error: 'Token Authentication failed ::: ' + error })
         } else {
-            pool.query('SELECT * FROM appkey WHERE app = $1', [decoded.key], error => {
+            pool.query('SELECT * FROM appkey WHERE app = $1', [decoded.key], (error, results) => {
                 if (error) {
                     console.log(error.stack)
                     response.status(400)
                     response.json({error: error.stack})
                     } else {
-                    response.status(200).json(decoded)
+                    response.status(200).json(results.rows)
                     console.log('App validated successfully')
                   }
             })
@@ -40,8 +40,8 @@ const verify = (request, response) => {
 
 function generateToken(appkey) {
     return {
-            'token' : jwt.sign(appkey, tokenKey, {expiresIn: '3 days'}),
-            'expiry': '3 days'
+            'token' : jwt.sign(appkey, tokenKey, {expiresIn: '100 years'}),
+            'expiry': '100 years'
         };
     }
 
