@@ -26,9 +26,8 @@ const verify = (request, response) => {
         } else {
             pool.query('SELECT * FROM appkey WHERE app = $1', [decoded.key], (error, results) => {
                 if (error || results.rows.length === 0) {
-                    console.log(error.stack)
                     response.status(400)
-                    response.json({error: error.stack})
+                    response.json({error: "Application in JWT is not register or has been deleted"})
                     } else {
                     response.status(200).json(results.rows)
                     console.log('App validated successfully')
