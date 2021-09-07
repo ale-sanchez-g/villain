@@ -37,10 +37,11 @@ const verify = (request, response) => {
     })
 }
 
-function generateToken(appkey) {
+function generateToken(payload) {
+    const expiry = payload.expiresIn || '3 days';
     return {
-            'token' : jwt.sign(appkey, tokenKey, {expiresIn: '3 days'}),
-            'expiry': '3 days'
+            'token' : jwt.sign(payload, tokenKey, {expiresIn: expiry}),
+            'expiry': expiry
         };
     }
 
