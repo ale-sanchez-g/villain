@@ -39,6 +39,10 @@ open your terminal and follow the below steps
 - run `npm install`
 - set `ELEPHANT_URL` variable with the postgress URL of the instance that you what to use
 - run `npm start` or `node app/index.js $PORT`
+- example:
+```
+ELEPHANT_URL=postgresql://postgres@localhost:5432/postgres  npm start
+```
 - Navigate to <http:localhoat:3000/api-docs> to view the swagger documentaiton of the API
 
 ## Test

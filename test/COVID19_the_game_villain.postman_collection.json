@@ -7,6 +7,101 @@
 	},
 	"item": [
 		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register app",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let r = Math.random().toString(36).substring(5);",
+									"",
+									"pm.environment.set(\"appname\", r);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    let payload = pm.response.json();",
+									"    pm.environment.set(\"token\", payload.token);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"key\": \"{{appname}}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/gentoken",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"gentoken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate app",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/auth/verifytoken",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"verifytoken"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "user",
 			"item": [
 				{
@@ -29,7 +124,13 @@
 							"type": "noauth"
 						},
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{url}}/v1/user",
 							"host": [
@@ -107,6 +208,11 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -191,6 +297,11 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -259,7 +370,13 @@
 					],
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"username\": \"{{username}}\",\n    \"score\": 200\n}",
@@ -310,7 +427,13 @@
 					],
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"username\": \"{{username_new}}\",\n    \"score\": 200\n}",
@@ -396,106 +519,11 @@
 					]
 				}
 			]
-		},
-		{
-			"name": "auth",
-			"item": [
-				{
-					"name": "register app",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"let r = Math.random().toString(36).substring(7);",
-									"",
-									"pm.environment.set(\"appname\", r);"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"    let payload = pm.response.json();",
-									"    pm.environment.set(\"token\", payload.token);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"key\": \"{{appname}}\"}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/auth/gentoken",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"auth",
-								"gentoken"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Validate app",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/auth/verifytoken",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"auth",
-								"verifytoken"
-							]
-						}
-					},
-					"response": []
-				}
-			]
 		}
 	],
 	"variable": [
 		{
-			"id": "fa682ee9-f402-46d2-af3f-0e7d22c1758f",
+			"id": "3df2a803-f2cc-49c8-b14c-a861b2d640d1",
 			"key": "baseUrl",
 			"value": "https://supervillain.herokuapp.com/v1",
 			"type": "string"
