@@ -41,6 +41,10 @@ app
   .route('/auth/verifytoken')
   .get(auth.verify)
 
+app.get('/', function (req, res) {
+  res.redirect('/api-docs')
+})
+
   app.listen(port, () => {
     console.log(`Server running on port http://localhost:${port}`);
    });
