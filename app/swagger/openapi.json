@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "COVID19 the game - villain",
-    "description": "This is a sample nodejs express server.",
+    "description": "The function of this API is to provide support to the COVID-19 game to manage application registrations as well as user scores.<br /><br /><br />This is an active project and there are regular changes to this API. If you find any defects please raise them using this [link](https://github.com/ale-sanchez-g/villain/issues)<br /><br /><br />To use this API you need to first register your application using the `/auth/gentoken` path and this will return a 3 day JWT, that you can use as Auth in the other API paths.",
     "contact": {
       "name": "COVID19 The game API Support",
       "email": "morisidivine@gmail.com"
