@@ -2,9 +2,14 @@
 
 import { sleep, group } from "k6";
 import http from "k6/http";
+import { randomIntBetween } from "https://jslib.k6.io/k6-utils/1.1.0/index.js";
 
 export let options = {
-  stages: [{ duration: "60s", target: 10 }],
+  stages: [{ duration: "60s", target: 20 }],
+  thresholds: {
+    http_req_failed: ['rate<0.01'],   // http errors should be less than 1% 
+    http_req_duration: ['p(95)<1700'], // 95% of requests should be below 1.7 seconds
+  },
 };
 export default function main() {
   let randName = Math.random().toString(36).substring(7);
@@ -39,6 +44,8 @@ export default function main() {
       },
     }
   );
+  
+  sleep(randomIntBetween(3, 5));
 
   response = http.post(
     "https://responsivefight.herokuapp.com/api/userstage",
@@ -69,6 +76,8 @@ export default function main() {
       },
     }
   );
+
+  sleep(randomIntBetween(3, 5));
 
   group("page_1 - https://responsivefight.herokuapp.com/covid", function () {
     response = http.get("https://responsivefight.herokuapp.com/covid", {
@@ -390,6 +399,9 @@ export default function main() {
     );
   });
 
+  sleep(randomIntBetween(5, 10));
+
+  
   group("page_2 - https://responsivefight.herokuapp.com/bus", function () {
     response = http.get("https://responsivefight.herokuapp.com/bus", {
       headers: {
@@ -728,6 +740,8 @@ export default function main() {
       }
     );
   });
+
+  sleep(randomIntBetween(5, 10));
 
   group(
     "page_3 - https://responsivefight.herokuapp.com/restaurant",
@@ -1070,6 +1084,8 @@ export default function main() {
       );
     }
   );
+
+  sleep(randomIntBetween(5, 10));
 
   group("page_4 - https://responsivefight.herokuapp.com/office", function () {
     response = http.get("https://responsivefight.herokuapp.com/office", {
@@ -1464,6 +1480,8 @@ export default function main() {
     );
   });
 
+  sleep(randomIntBetween(5, 10));
+
   group(
     "page_5 - https://responsivefight.herokuapp.com/leaderboard",
     function () {
@@ -1618,6 +1636,8 @@ export default function main() {
       );
     }
   );
+
+  sleep(randomIntBetween(5, 10));
 
   group("page_6 - https://responsivefight.herokuapp.com/covid", function () {
     response = http.get("https://responsivefight.herokuapp.com/covid", {
@@ -1930,6 +1950,8 @@ export default function main() {
       }
     );
   });
+
+  sleep(randomIntBetween(5, 10));
 
   group("page_7 - https://responsivefight.herokuapp.com/news", function () {
     response = http.get("https://responsivefight.herokuapp.com/news", {
@@ -2326,6 +2348,5 @@ export default function main() {
     );
   });
 
-  // Automatically added sleep
-  sleep(1);
+  sleep(randomIntBetween(5, 10));
 }
