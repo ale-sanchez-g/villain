@@ -17,7 +17,6 @@ jobs:
         uses: actions/setup-node@v2
       - run: npm install
       - run: NODE_ENV=production ELEPHANT_URL=${{ secrets.ELEPHANT_URL_TEST}} PORT=3000 npm start & >> app.log & sleep 10
-      - run: npm run getkey
 
       - name: Run local k6 test
         uses: k6io/action@v0.1
