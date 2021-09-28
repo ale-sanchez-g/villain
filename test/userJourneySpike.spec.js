@@ -15,7 +15,7 @@ export let options = {
   ],
   thresholds: {
     http_req_failed: ['rate<0.01'],   // http errors should be less than 1% 
-    http_req_duration: ['p(95)<70'], // 95% of requests should be below 50ms
+    http_req_duration: ['p(95)<1700'], // 95% of requests should be below 1.7 seconds
   },
 };
 
@@ -81,7 +81,7 @@ function getToken () {
   let authres = http.post(`${__ENV.MY_HOSTNAME}/auth/gentoken`,payload, params);
   let token = authres.json().token;
   check(authres, {
-    "Create user status 200": r => r.status === 200,
+    "Application added status 200": r => r.status === 200,
   });
   return token;
 }
