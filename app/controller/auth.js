@@ -8,12 +8,12 @@ const addApp = (request, response) => {
 
     pool.query('INSERT INTO appkey (app) VALUES ($1)', [key], error => {
         if (error) {
-          console.log(error.stack)
           response.status(400)
           response.json({error: error.stack})
+          console.log(`addApp:ERR ${error.stack}`)
           } else {
-          response.status(200).json(generateToken(request.body))
-          console.log('App added successfully')
+            response.status(200).json(generateToken(request.body))
+            console.log(`App ${key} added successfully`)
         }
     })
   }

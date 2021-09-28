@@ -1,0 +1,21 @@
+# .github/workflows/load-test.yml
+
+name: k6 Load Test
+on:
+  push:
+    branches: [ test/k6 ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Run local k6 test
+        uses: k6io/action@v0.1
+      - run: npm install
+      - run: NODE_ENV=production ELEPHANT_URL=${{ secrets.ELEPHANT_URL_TEST}} PORT=3000 npm start & >> app.log & sleep 10
+      - run: npm run getkey
+      - run: k6 run --quiet -e MY_HOSTNAME=http://localhost:3000 test/userJourneyLoad.spec.js
