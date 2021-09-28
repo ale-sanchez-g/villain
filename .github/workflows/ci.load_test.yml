@@ -21,5 +21,5 @@ jobs:
         uses: actions/setup-node@v2
       - run: npm install
       - run: |
-          NODE_ENV=production ELEPHANT_URL=${{ secrets.ELEPHANT_URL_TEST}} PORT=3000 npm start & npx wait-on http://localhost:3000
+          NODE_ENV=production ELEPHANT_URL=${{ secrets.ELEPHANT_URL_TEST}} PORT=3000 npm start & >> app.log & sleep 10
           ./k6 run --quiet -e MY_HOSTNAME=http://localhost:3000 test/userJourneyLoad.spec.js
