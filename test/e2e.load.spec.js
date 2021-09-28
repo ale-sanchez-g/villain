@@ -3,15 +3,17 @@
 import { sleep, group } from "k6";
 import http from "k6/http";
 
-export const options = {};
-
+export let options = {
+  stages: [{ duration: "60s", target: 10 }],
+};
 export default function main() {
+  let randName = Math.random().toString(36).substring(7);
   let response;
 
   response = http.post(
     "https://responsivefight.herokuapp.com/api/adduser",
     {
-      username: "alberto",
+      username: randName,
       score: "0",
     },
     {
@@ -41,7 +43,7 @@ export default function main() {
   response = http.post(
     "https://responsivefight.herokuapp.com/api/userstage",
     {
-      username: "alberto",
+      username: randName,
       stage: "news_1",
     },
     {
@@ -699,7 +701,7 @@ export default function main() {
     response = http.post(
       "https://responsivefight.herokuapp.com/api/updateuser",
       {
-        username: "alberto",
+        username: randName,
         score: "100",
       },
       {
@@ -1040,7 +1042,7 @@ export default function main() {
       response = http.post(
         "https://responsivefight.herokuapp.com/api/updateuser",
         {
-          username: "alberto",
+          username: randName,
           score: "200",
         },
         {
@@ -1434,7 +1436,7 @@ export default function main() {
     response = http.post(
       "https://responsivefight.herokuapp.com/api/updateuser",
       {
-        username: "alberto",
+        username: randName,
         score: "300",
       },
       {
@@ -2221,7 +2223,7 @@ export default function main() {
     response = http.post(
       "https://responsivefight.herokuapp.com/api/updateuser",
       {
-        username: "alberto",
+        username: randName,
         score: "301",
       },
       {
