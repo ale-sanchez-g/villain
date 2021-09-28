@@ -13,9 +13,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Run local k6 test
-        uses: k6io/action@v0.1
+      - name: Install and run
       - run: npm install
       - run: NODE_ENV=production ELEPHANT_URL=${{ secrets.ELEPHANT_URL_TEST}} PORT=3000 npm start & >> app.log & sleep 10
       - run: npm run getkey
-      - run: k6 run --quiet -e MY_HOSTNAME=http://localhost:3000 test/userJourneyLoad.spec.js
+
+      - name: Run local k6 test
+        uses: k6io/action@v0.1
+        with: 
+          filenam: test/userJourneyLoad.spec.js
