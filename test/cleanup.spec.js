@@ -16,7 +16,7 @@ let params = {
     // Long user journey
     group('Delete users', function() {
 
-      let dures = http.delete(`${__ENV.MY_HOSTNAME}/v1/user`, params);
+      let dures = http.del(`${__ENV.MY_HOSTNAME}/v1/user`,null, params);
 
       check(dures, {
         "Delete users status 204": r => r.status === 204,
