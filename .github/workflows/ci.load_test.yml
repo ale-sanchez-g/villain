@@ -23,3 +23,4 @@ jobs:
       - run: |
           NODE_ENV=production ELEPHANT_URL=${{ secrets.ELEPHANT_URL_TEST}} PORT=3000 npm start > output.log & npx wait-on http://localhost:3000
           ./k6 run --quiet -e MY_HOSTNAME=http://localhost:3000 test/userJourneyLoad.spec.js
+          ./k6 run --quiet -e MY_HOSTNAME=http://localhost:3000 test/cleanup.spec.js
