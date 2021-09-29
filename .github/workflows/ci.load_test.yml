@@ -1,0 +1,26 @@
+# .github/workflows/load-test.yml
+
+name: k6 Load Test
+on:
+  push:
+    branches: [ test/k6, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Install k6
+        run: |
+          curl https://github.com/loadimpact/k6/releases/download/v0.26.2/k6-v0.26.2-linux64.tar.gz -L | tar xvz --strip-components 1
+
+      - name: Install and run
+        uses: actions/setup-node@v2
+      - run: npm install
+      - run: |
+          NODE_ENV=production ELEPHANT_URL=${{ secrets.ELEPHANT_URL_TEST}} PORT=3000 npm start > output.log & npx wait-on http://localhost:3000
+          ./k6 run --quiet -e MY_HOSTNAME=http://localhost:3000 test/userJourneyLoad.spec.js
+          ./k6 run --quiet -e MY_HOSTNAME=http://localhost:3000 test/cleanup.spec.js

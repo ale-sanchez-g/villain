@@ -39,7 +39,7 @@ const addUser = (request, response) => {
             response
               .status(201)
               .json({ status: "success", message: "User added." });
-            console.log("user added successfully");
+            console.log(`user ${username} added successfully`);
           }
         }
       );
@@ -64,14 +64,15 @@ const updateUser = (request, response) => {
                   .status(201)
                   .json({
                     status: "success",
-                    message: "User added with updated score",
+                    message: `User ${username} added with updated score`,
                   });
+                console.log(`user ${username} added with updated score`);
               }
             );
           } else {
             response.status(204);
             response.json();
-            console.log("user updated successfully");
+            console.log(`user ${username} updated successfully`);
           }
         }
       );

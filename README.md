@@ -52,8 +52,16 @@ ELEPHANT_URL=postgresql://postgres@localhost:5432/postgres  npm start
 
 ## Performance test
 
-- Navigate to <https://k6.io/docs/getting-started/installation> and follow the instructions
-- run `npm run perf:test`
+Navigate to <https://k6.io/docs/getting-started/installation> and follow the instructions
+
+We have set up 4 test to validate the performance of the API.
+
+- e2e // seems to break the app DO NOT RUN
+- smoke (k6.spec.js)
+- Load (userJourneyLoad.spec.js)
+- Spike (userJourneySpike.spec.js)
+
+You can run the above by running `k6 run userJourneyLoad.spec.js` or by labiling you pull request with "perftest"
 
 ## Swagger
 
