@@ -5,8 +5,8 @@ import { randomIntBetween } from "https://jslib.k6.io/k6-utils/1.1.0/index.js";
 
 export let options = {
   stages: [
-    { duration: '5m', target: 20 },
-    { duration: '5m', target: 20 },
+    { duration: '5m', target: 15 },
+    { duration: '5m', target: 15 },
     { duration: '5m', target: 0 },
   ],
   thresholds: {
