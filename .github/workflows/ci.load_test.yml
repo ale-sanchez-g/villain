@@ -2,12 +2,11 @@
 
 name: k6 Load Test
 on:
-  pull_request:
-    types: [ labeled ]
+  push:
+    branches: [ test/k6, master ]
 
 jobs:
   build:
-    if: ${{ github.event.label.name == 'perftest' }}
     runs-on: ubuntu-latest
 
     steps:
