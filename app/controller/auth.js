@@ -1,4 +1,6 @@
 const { pool } = require('../config')
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const jwt = require('jsonwebtoken');
 const tokenKey = 'secret' || process.env.AUTH_KEY;
@@ -12,7 +14,18 @@ const addApp = (request, response) => {
           response.json({error: error.stack})
           console.log(`addApp:ERR ${error.stack}`)
           } else {
-            response.status(200).json(generateToken(request.body))
+        
+            let payloadResponse = generateToken(request.body);
+        
+            sendMail(request.body.email, payloadResponse.token)
+            let fullRes;
+
+            if (request.body.returnKey === true) {
+                fullRes = {...payloadResponse, emailTo: request.body.email}
+            } else {
+                fullRes = {emailTo: request.body.email}
+            }
+            response.status(200).json(fullRes)
             console.log(`App ${key} added successfully`)
         }
     })
@@ -41,12 +54,23 @@ function generateToken(payload) {
     const expiry = payload.expiresIn || '3 days';
     return {
             'token' : jwt.sign(payload, tokenKey, {expiresIn: expiry}),
-            'expiry': expiry
+            'expiresIn': expiry
         };
     }
 
 function verifyToken(token) {
     return jwt.verify(token, tokenKey);
 }    
+
+function sendMail(email, tokenKey) {
+    const msg = {
+      to: email,
+        from: `morsisdivine@gmail.com`,
+        subject: `Application registration and TokenKey`,
+        text: `Congratulations your application is register and the tokeKey is ${tokenKey}`,
+        html: `Congratulations your application is register and the tokeKey is <strong>${tokenKey}</strong>`,
+    };
+    sgMail.send(msg);
+}
 
 module.exports = { addApp, verify, generateToken, verifyToken };

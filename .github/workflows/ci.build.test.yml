@@ -24,5 +24,13 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
-    - run: NODE_ENV=production ELEPHANT_URL=${{ secrets.ELEPHANT_URL_TEST}} PORT=3000 npm start & >> app.log & sleep 10
-    - run: npm run test
+    - run: mkdir -p testResults
+    - run: NODE_ENV=production SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }} ELEPHANT_URL=${{ secrets.ELEPHANT_URL_TEST}} PORT=3000 npm start & sleep 10
+    - run: node_modules/.bin/newman run test/COVID19_the_game_villain.postman_collection.json --env-var url=http://localhost:3000 -r cli,htmlextra --reporter-htmlextra-export testResults/htmlreport.html
+
+    # Upload the contents of Test Results directory to workspace
+    - name: Output the run Details
+      uses: actions/upload-artifact@v2
+      with: 
+       name: RunReports
+       path: testResults

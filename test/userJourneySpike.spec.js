@@ -77,6 +77,9 @@ function getToken () {
   let r = Math.random().toString(36).substring(7);
   let payload = JSON.stringify({
     key: r,
+    email: `${r}@yopmail.com`,
+    returnKey: true,
+    expiresIn: "2 days"
   });
   let authres = http.post(`${__ENV.MY_HOSTNAME}/auth/gentoken`,payload, params);
   let token = authres.json().token;
