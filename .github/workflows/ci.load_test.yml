@@ -3,7 +3,7 @@
 name: k6 Load Test
 on:
   push:
-    branches: [ master ]
+    branches: [ feature/emailKey, master ]
 
 jobs:
   build:
