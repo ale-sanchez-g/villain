@@ -24,7 +24,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
-    - run: npm install newman-reporter-htmlextra
     - run: mkdir -p testResults
     - run: NODE_ENV=production SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }} ELEPHANT_URL=${{ secrets.ELEPHANT_URL_TEST}} PORT=3000 npm start & sleep 10
     - run: node_modules/.bin/newman run test/COVID19_the_game_villain.postman_collection.json --env-var url=http://localhost:3000 -r cli, htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme  > testResults/runreport1.html
