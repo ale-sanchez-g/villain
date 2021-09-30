@@ -79,7 +79,7 @@ function getToken () {
     key: r,
     email: `${r}@yopmail.com`,
     returnKey: true,
-    expiresIn: "3600"
+    expiresIn: "2 days"
   });
   let authres = http.post(`${__ENV.MY_HOSTNAME}/auth/gentoken`,payload, params);
   let token = authres.json().token;

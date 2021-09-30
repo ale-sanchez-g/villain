@@ -5,7 +5,7 @@ name: Build, Test
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ feature/emailKey, master ]
 
 jobs:
   build:
