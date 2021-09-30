@@ -3,7 +3,7 @@
 name: k6 Load Test
 on:
   push:
-    branches: [ test/k6, master ]
+    branches: [ master ]
 
 jobs:
   build:

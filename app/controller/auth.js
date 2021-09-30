@@ -14,9 +14,18 @@ const addApp = (request, response) => {
           response.json({error: error.stack})
           console.log(`addApp:ERR ${error.stack}`)
           } else {
+        
             let payloadResponse = generateToken(request.body);
+        
             sendMail(request.body.email, payloadResponse.token)
-            response.status(200).json(payloadResponse)
+            let fullRes;
+
+            if (request.body.returnKey === true) {
+                fullRes = {...payloadResponse, emailTo: request.body.email}
+            } else {
+                fullRes = {emailTo: request.body.email}
+            }
+            response.status(200).json(fullRes)
             console.log(`App ${key} added successfully`)
         }
     })
@@ -45,7 +54,7 @@ function generateToken(payload) {
     const expiry = payload.expiresIn || '3 days';
     return {
             'token' : jwt.sign(payload, tokenKey, {expiresIn: expiry}),
-            'expiry': expiry
+            'expiresIn': expiry
         };
     }
 
@@ -59,7 +68,7 @@ function sendMail(email, tokenKey) {
         from: `morsisdivine@gmail.com`,
         subject: `Application registration and TokenKey`,
         text: `Congratulations your application is register and the tokeKey is ${tokenKey}`,
-        html: `<strong>Congratulations your application is register and the tokeKey is ${tokenKey}</strong>`,
+        html: `Congratulations your application is register and the tokeKey is <strong>${tokenKey}</strong>`,
     };
     sgMail.send(msg);
 }

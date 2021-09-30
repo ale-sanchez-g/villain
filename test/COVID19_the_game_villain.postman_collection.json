@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "17b00a08-b54d-4db3-9e79-8ac362af50f4",
+		"_postman_id": "42310f2d-8fb2-4101-9364-124e59e4145b",
 		"name": "COVID19_the_game_villain",
 		"description": "This is a sample nodejs express server.\n\nContact Support:\n Name: COVID19 The gaes APIs Support\n Email: morisidivine@gmail.com",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -42,7 +42,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"key\": \"{{appname}}\"}",
+							"raw": "{\n    \"key\": \"{{appname}}\",\n    \"email\": \"{{appname}}@yopmail.com\",\n    \"returnKey\": true,\n    \"expiresIn\": \"3600\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -523,7 +523,6 @@
 	],
 	"variable": [
 		{
-			"id": "3df2a803-f2cc-49c8-b14c-a861b2d640d1",
 			"key": "baseUrl",
 			"value": "https://supervillain.herokuapp.com/v1",
 			"type": "string"
