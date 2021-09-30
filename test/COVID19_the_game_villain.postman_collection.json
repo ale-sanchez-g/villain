@@ -42,7 +42,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"key\": \"{{appname}}\",\n    \"email\": \"{{appname}}@yopmail.com\",\n    \"returnKey\": true,\n    \"expiresIn\": \"3600\"\n}",
+							"raw": "{\n    \"key\": \"{{appname}}\",\n    \"email\": \"{{appname}}@yopmail.com\",\n    \"returnKey\": true,\n    \"expiresIn\": \"2 days\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
