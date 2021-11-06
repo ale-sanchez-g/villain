@@ -41,6 +41,10 @@ app
   .route('/auth/verifytoken')
   .get(auth.verify)
 
+app
+  .route('/auth/user/register')
+  .post(auth.registerUser)
+
 app.get('/', function (req, res) {
   res.redirect('/api-docs')
 })

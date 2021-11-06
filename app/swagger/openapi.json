@@ -11,7 +11,7 @@
       "name": "MIT",
       "url": "https://github.com/ale-sanchez-g/villain/blob/master/LICENSE"
     },
-    "version": "1.1.0"
+    "version": "1.2.0"
   },
   "servers": [
     {
@@ -20,7 +20,7 @@
     },
     {
       "url": "http://localhost:3000",
-      "description": "localhosy server"
+      "description": "localhost server"
     }
   ],
   "paths": {
@@ -137,6 +137,73 @@
                   "properties": {
                     "error": {
                       "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/user/register": {
+      "post": {
+        "summary": "This request enables you to register the user",
+        "description": "User and password is register in the DB",
+        "requestBody": {
+          "description": "Registers a new user",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user is created successfully"
+          },
+          "400": {
+            "description": "User fail to be created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "user already exist"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Application authetication declined",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "incorrect user name and password"
                     }
                   }
                 }
