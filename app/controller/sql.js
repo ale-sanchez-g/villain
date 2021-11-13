@@ -110,7 +110,7 @@ function authenticate(request, response, next) {
         .status(403)
         .json({ error: "Token Authentication failed ::: " + error });
     } else {
-      console.log("Application used ::: " + decoded.keys);
+      console.log("Application used ::: " + decoded.key);
       next();
     }
   });
