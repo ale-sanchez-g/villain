@@ -95,10 +95,60 @@ const registerUser = (request, response) => {
   });
 };
 
+const logIn = (request, response) => {
+  const { username, password } = request.body;
+  const token = request.headers.authorization;
+  jwt.verify(token, tokenKey, (error) => {
+    if (error) {
+      response
+        .status(401)
+        .json({ error: "Token Authentication failed ::: " + error });
+    } else {
+      switch (true) {
+        case username.length === 0:
+          response.status(400).json({
+            error: "Username is required",
+          });
+          break;
+        case password.length === 0:
+          response.status(400).json({
+            error: "Password is required",
+          });
+          break;
+        default:
+          pool.query(
+            "SELECT * FROM usertable WHERE username = $1 AND pwd = $2",
+            [username, password],
+            (error, results) => {
+              if (error) {
+                response.status(400);
+                response.json({
+                  error: error,
+                });
+              } else {
+                if (results.rows.length === 0) {
+                  response.status(400).json({
+                    error: "Username or Password is incorrect",
+                  });
+                } else {
+                  let shortToken = {"username": username, expiresIn: "3 min"};
+                  let userToken = generateToken(shortToken);
+
+                  response.status(200).json(userToken);
+                  console.log(`${username} logged in successfully`);
+                }
+              }
+            }
+          );
+      }
+    }
+  });
+};
+
 function generateToken(payload) {
   const expiry = payload.expiresIn || "3 days";
   return {
-    token: jwt.sign(payload, tokenKey, { expiresIn: expiry }),
+    token: jwt.sign(payload, tokenKey, { expiresIn: expiry, algorithm: "HS512" }),
     expiresIn: expiry,
   };
 }
@@ -122,4 +172,4 @@ function sendMail(email, tokenKey) {
   }
 }
 
-module.exports = { addApp, verify, registerUser, generateToken, verifyToken };
+module.exports = { addApp, verify, registerUser, logIn, generateToken, verifyToken };

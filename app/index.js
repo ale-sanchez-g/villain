@@ -45,6 +45,10 @@ app
   .route('/auth/user/register')
   .post(auth.registerUser)
 
+app
+  .route('/auth/user/login')
+  .post(auth.logIn) 
+
 app.get('/', function (req, res) {
   res.redirect('/api-docs')
 })

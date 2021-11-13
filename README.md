@@ -61,7 +61,9 @@ We have set up 4 test to validate the performance of the API.
 - Load (userJourneyLoad.spec.js)
 - Spike (userJourneySpike.spec.js)
 
-You can run the above by running `k6 run userJourneyLoad.spec.js` or by labiling you pull request with "perftest"
+You can run the above by running `k6 run userJourneyLoad.spec.js` or by updating the ci.load_test.yml file with the name of the branch you can test run the load test.
+
+If you are making major changes to the DB queries or changes to the DB, we recommend you run the load test to validate the performance of the API.
 
 ## Swagger
 
