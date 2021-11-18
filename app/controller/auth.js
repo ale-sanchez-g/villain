@@ -3,7 +3,7 @@ const sgMail = require("@sendgrid/mail");
 const jwt = require("jsonwebtoken");
 
 const tokenKey = "secret" || process.env.AUTH_KEY;
-const emailKey = "off" || process.env.SENDGRID_API_KEY;
+const emailKey = process.env.SENDGRID_API_KEY;
 
 if (emailKey !== "off") {
   sgMail.setApiKey(emailKey);
