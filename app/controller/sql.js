@@ -115,4 +115,23 @@ function authenticate(request, response, next) {
     }
   });
 }
+
+function authenticateUser(request, response, next) {
+  const token = request.headers.authorization;
+  jwt.verify(token, tokenKey, (error, decoded) => {
+    if (error) {
+      response
+        .status(403)
+        .json({ error: "Token Authentication failed ::: " + error });
+    } else {
+      if (decoded.username !== undefined ) {  // check JWT user value
+        console.log("User logged ::: " + decoded.username);
+        next();
+      } else {
+        response.status(403).json({ error: "Token Authentication failed :: Incorrect token used" });
+      }
+    }
+  });
+}
+
 module.exports = { getUser, addUser, updateUser, cleanUsers };

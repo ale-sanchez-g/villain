@@ -11,7 +11,7 @@
       "name": "MIT",
       "url": "https://github.com/ale-sanchez-g/villain/blob/master/LICENSE"
     },
-    "version": "1.1.0"
+    "version": "1.3.0"
   },
   "servers": [
     {
@@ -20,12 +20,29 @@
     },
     {
       "url": "http://localhost:3000",
-      "description": "localhosy server"
+      "description": "localhost server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Application Authorisation",
+      "description": "Registration and verification of Applications"
+    },
+    {
+      "name": "User Authentication",
+      "description": "Registration and Authentication of Users"
+    },
+    {
+      "name": "User Leaderboard",
+      "description": "Add users and points into the leaderboard"
     }
   ],
   "paths": {
     "/auth/gentoken": {
       "post": {
+        "tags": [
+          "Application Authorisation"
+        ],
         "requestBody": {
           "description": "Send application Key",
           "required": true,
@@ -85,6 +102,9 @@
     },
     "/auth/verifytoken": {
       "get": {
+        "tags": [
+          "Application Authorisation"
+        ],
         "summary": "Verify your token still valid.",
         "security": [
           {
@@ -146,8 +166,168 @@
         }
       }
     },
+    "/auth/user/register": {
+      "post": {
+        "tags": [
+          "User Authentication"
+        ],
+        "summary": "This request enables you to register the user",
+        "description": "User and password is register in the DB",
+        "requestBody": {
+          "description": "Registers a new user",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user is created successfully"
+          },
+          "400": {
+            "description": "User fail to be created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "user already exist"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Application authetication declined",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "incorrect user name and password"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/user/login": {
+      "post": {
+        "tags": [
+          "User Authentication"
+        ],
+        "summary": "User Login",
+        "description": "User and password is read from the DB",
+        "requestBody": {
+          "description": "User login",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login sucessfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjcybWdpdyIsImV4cGlyZXNJbiI6IjMgbWluIiwiaWF0IjoxNjM2Nzk2NjkwLCJleHAiOjE2MzY3OTY4NzB9.OexixxQrQBOXu58dZhG4jCVnB8CykK3KyxCA6kgqIye8duL4MffLexaCYt6rvO97Ib7tk9wjj9N3KGiTzu_f3g"
+                    },
+                    "expiresIn": {
+                      "type": "string",
+                      "example": "3 min"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unable to login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "user already exist"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Application authetication declined",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "incorrect user name and password"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/user": {
       "get": {
+        "tags": [
+          "User Leaderboard"
+        ],
         "summary": "Returns a list of users.",
         "description": "The users are returned in a array in DES score order.",
         "security": [
@@ -198,6 +378,9 @@
         }
       },
       "post": {
+        "tags": [
+          "User Leaderboard"
+        ],
         "summary": "Add a new user",
         "requestBody": {
           "description": "Adds a new user to the leaderboard",
@@ -248,6 +431,9 @@
         }
       },
       "put": {
+        "tags": [
+          "User Leaderboard"
+        ],
         "summary": "Update user",
         "requestBody": {
           "description": "updates user",
@@ -298,6 +484,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "User Leaderboard"
+        ],
         "summary": "Delete users",
         "parameters": [
           {
