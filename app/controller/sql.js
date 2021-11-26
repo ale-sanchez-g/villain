@@ -7,7 +7,7 @@ const getUser = (request, response) => {
   authenticate(request, response, error => {
     if (!error) {
       pool.query(
-        "SELECT * FROM leaderboard ORDER BY score DESC",
+        "SELECT username,score FROM leaderboard ORDER BY score DESC",
         (error, results) => {
           if (error) {
             console.log(error.stack);
