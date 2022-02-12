@@ -38,10 +38,11 @@ open your terminal and follow the below steps
     - NOTE: Also make sure your shell script is formatted with Unix style, or there can be errors.
 - run `npm install`
 - set `ELEPHANT_URL` variable with the postgress URL of the instance that you what to use
+- set `SENDGRID_API_KEY` with your SENDGRID API KEY, or you can set it to `off` so the function to send emails is not called
 - run `npm start` or `node app/index.js $PORT`
 - example:
 ```
-ELEPHANT_URL=postgresql://postgres@localhost:5432/postgres  npm start
+SENDGRID_API_KEY=off ELEPHANT_URL=postgresql://postgres@localhost:5432/postgres  npm start
 ```
 - Navigate to <http:localhoat:3000/api-docs> to view the swagger documentaiton of the API
 
