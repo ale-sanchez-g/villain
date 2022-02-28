@@ -4,7 +4,7 @@
   "description": "covid19 game villain",
   "main": "index.js",
   "engines": {
-    "node": "15.x"
+    "node": "17.x"
   },
   "scripts": {
     "start": "node app/index.js $PORT",
@@ -39,6 +39,8 @@
     "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.9.12",
+    "cypress": "^9.4.1",
     "newman": "^5.0.0"
   }
 }

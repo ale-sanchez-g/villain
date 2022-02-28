@@ -120,13 +120,10 @@
                   "type": "object",
                   "properties": {
                     "key": {
+                      "app_id": "integer"
+                    },
+                    "app": {
                       "type": "string"
-                    },
-                    "iat": {
-                      "type": "integer"
-                    },
-                    "exp": {
-                      "type": "integer"
                     }
                   }
                 }
