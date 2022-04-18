@@ -119,8 +119,8 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "key": {
-                      "app_id": "integer"
+                    "app_id": {
+                      "type": "integer"
                     },
                     "app": {
                       "type": "string"

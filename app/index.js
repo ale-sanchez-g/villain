@@ -54,6 +54,23 @@ app.get('/', function (req, res) {
   res.redirect('/api-docs')
 })
 
+app.get('/health', function (req, res) {  // Health check
+  const data = {
+    uptime: process.uptime(),
+    message: 'Ok',
+    date: new Date()
+  }
+
+  res.status(200).send(data)
+})
+
+
   app.listen(port, () => {
     console.log(`Server running on port http://localhost:${port}`);
+    console.log(
+      `New Relic config : { 
+        APP: ${process.env.NEW_RELIC_APP_NAME}, 
+        LOG: ${process.env.NEW_RELIC_LOG},
+      }`
+      );
    });
