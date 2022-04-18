@@ -67,4 +67,10 @@ app.get('/health', function (req, res) {  // Health check
 
   app.listen(port, () => {
     console.log(`Server running on port http://localhost:${port}`);
+    console.log(
+      `New Relic config : { 
+        APP: ${process.env.NEW_RELIC_APP_NAME}, 
+        LOG: ${process.env.NEW_RELIC_LOG},
+      }`
+      );
    });
