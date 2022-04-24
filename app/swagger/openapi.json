@@ -35,6 +35,10 @@
     {
       "name": "User Leaderboard",
       "description": "Add users and points into the leaderboard"
+    },
+    {
+      "name": "User",
+      "description": "Manages the user authenticated transactions"
     }
   ],
   "paths": {
@@ -498,6 +502,71 @@
         "responses": {
           "204": {
             "description": "Deleted"
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/user/{name}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get user by name.",
+        "description": "The user is returned in a array, must use the **user login authentication token** not the application token.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "JWT": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON array of user names",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "username": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "Invalid request",

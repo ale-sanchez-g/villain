@@ -23,6 +23,27 @@ const getUser = (request, response) => {
   });
 };
 
+const getUserByName = (request, response) => {
+  authenticateUser(request, response, error => {
+    if (!error) {
+      pool.query(
+        "SELECT username,score FROM leaderboard WHERE username = $1",
+        [request.params.name],
+        (error, results) => {
+          if (error) {
+            console.log(error.stack);
+            response.status(400);
+            response.json({ error: error.stack });
+          } else {
+            response.status(200).json(results.rows);
+            console.log(`user ${request.params.name} parameters loaded successfully`);
+          }
+        }
+      );
+    }
+  });
+};
+
 const addUser = (request, response) => {
   const { username, score } = request.body;
   authenticate(request, response, error => {
@@ -155,4 +176,4 @@ function validateScore (score) {
     return`ERR400-invalid-score-value`;
   }
 }
-module.exports = { getUser, addUser, updateUser, cleanUsers };
+module.exports = { getUser, addUser, updateUser, cleanUsers, getUserByName };
