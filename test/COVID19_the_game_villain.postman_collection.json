@@ -553,6 +553,204 @@
 					]
 				},
 				{
+					"name": "Update user score Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{username}}\",\n    \"score\": 200\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/v1/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user score",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{username}}\",\n    \"score\": 200\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/v1/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Returns user details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{userToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/v1/user/{{username}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1",
+								"user",
+								"{{username}}"
+							]
+						},
+						"description": "The users are returned in a array in DES score order."
+					},
+					"response": [
+						{
+							"name": "Returns user details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{userToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/v1/user/{{username}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"v1",
+										"user",
+										"{{username}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "35"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"23-fW/w6UnwdU3qK91axcsruwJLf20\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 24 Apr 2022 13:39:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"username\": \"4abh2i\",\n        \"score\": 100\n    }\n]"
+						}
+					]
+				},
+				{
 					"name": "Add a new user",
 					"event": [
 						{
@@ -686,52 +884,6 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"username\": \"{{username}}\",\n    \"score\": 100\n}"
-						},
-						"url": {
-							"raw": "{{url}}/v1/user",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"v1",
-								"user"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update user score",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 204\", function () {",
-									"    pm.response.to.have.status(204);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"username\": \"{{username}}\",\n    \"score\": 200\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
 						},
 						"url": {
 							"raw": "{{url}}/v1/user",

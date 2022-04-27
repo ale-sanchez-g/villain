@@ -33,6 +33,10 @@ app
   .put(controllers.updateUser)
   // DELETE endpoint
   .delete(controllers.cleanUsers)
+app
+  .route('/v1/user/:name')
+  // User Authenticated GET endpoint
+  .get(controllers.getUserByName)
 
 app
   .route('/auth/gentoken')
