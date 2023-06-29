@@ -3,7 +3,7 @@
 name: k6 Load Test
 on:
   push:
-    branches: [ techdebt/load ]
+    branches: [ feature/dynatrace ]
 
 jobs:
   build:
