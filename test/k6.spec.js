@@ -2,7 +2,15 @@ import { group, check } from "k6";
 import http from "k6/http";
 
 export let options = {
-  stages: [{ duration: "60s", target: 1 }],
+  stages: [
+    { duration: '5m', target: 15 },
+    { duration: '5m', target: 15 },
+    { duration: '5m', target: 0 },
+  ],
+  thresholds: {
+    http_req_failed: ['rate<0.01'],   // http errors should be less than 1% 
+    http_req_duration: ['p(95)<1700'], // 95% of requests should be below 1.7 seconds
+  },
 };
 
 export default function () {

@@ -355,3 +355,6 @@ MigrationBackup/
 # Reports
 
 newman/
+
+# Environment
+.env
