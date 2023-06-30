@@ -4,7 +4,7 @@
   "description": "covid19 game villain",
   "main": "index.js",
   "engines": {
-    "node": "17.x"
+    "node": "20.x"
   },
   "scripts": {
     "start": "node app/index.js $PORT",
@@ -34,8 +34,8 @@
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "newman-reporter-htmlextra": "^1.22.11",
-    "newrelic": "^8.9.1",
     "nodemon": "^2.0.20",
+
     "pg": "^8.0.3",
     "swagger-ui-express": "^4.1.4"
   },

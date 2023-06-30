@@ -5,9 +5,10 @@ import { randomIntBetween } from "https://jslib.k6.io/k6-utils/1.1.0/index.js";
 
 export let options = {
   stages: [
+    { duration: '1m', target: 1},
     { duration: '5m', target: 15 },
     { duration: '5m', target: 15 },
-    { duration: '5m', target: 0 },
+    { duration: '1m', target: 0 },
   ],
   thresholds: {
     http_req_failed: ['rate<0.01'],   // http errors should be less than 1% 

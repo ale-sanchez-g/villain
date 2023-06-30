@@ -7,9 +7,10 @@ The purpose of the villain API is to provide users and score functionality. The 
 
 ## Requirements
 
-- node 10x or above
+- node 17x or above
 - postgres
 - ElephantSQL postgress account
+- Sendgrid account
 
 ## Get started
 
@@ -37,14 +38,17 @@ open your terminal and follow the below steps
 - run `npm install`
 - set `ELEPHANT_URL` variable with the postgress URL of the instance that you what to use
 - set `SENDGRID_API_KEY` with your SENDGRID API KEY, or you can set it to `off` so the function to send emails is not called
-- set `NEW_RELIC_APP_NAME` variable with the name of your app
-- set `NEW_RELIC_LICENSE_KEY` variable with your NEW_RELIC_LICENSE_KEY
 - run `npm start` or `node app/index.js $PORT`
 - example:
 ```
-NEW_RELIC_APP_NAME=villan SENDGRID_API_KEY=off ELEPHANT_URL=postgresql://postgres@localhost:5432/postgres  npm start
+SENDGRID_API_KEY=off ELEPHANT_URL=postgresql://postgres@localhost:5432/postgres  npm start
 ```
 - Navigate to <http:localhoat:3000/api-docs> to view the swagger documentaiton of the API
+
+to run in production
+```
+NODE_ENV=productino SENDGRID_API_KEY=<enterKEY> ELEPHANT_URL=<enterPostgressUrl> npm start
+```
 
 ## Test
 
@@ -73,3 +77,24 @@ After starting the service localy, refer to localhost:3000/api-docs endpoint
 Please ensure you update the functinality as you fo using https://editor.swagger.io/, just updaload the openapi.json file from the swagger fordel into the editor ( you will be prompted to change to yaml). Then make the relevant changes and dowload the as JSON file.
 
 The replace openapi.json and comimt the changes in a Pull request.
+
+## Sendgrid
+
+We use sendgrid for sending authentication keys over email, as part of our 2FA system. To get the sendgrid API key you need to register.
+
+Current account for this project is under creation.
+
+## Elephant SQL
+
+We use the free tier of ElephantSQL to host our database. To get access to the database you need to register.
+
+Log into your account and get the URL from the instance 
+
+## Docker
+
+Run application with docker
+
+```
+docker build -t villan-api:latest .
+docker run -p 3000:3000 -e SENDGRID_API_KEY=off -e NODE_ENV=production -e ELEPHANT_URL=postgres://kcsamhgt:JxyFVrkWWRpUxTjuzlB-r_VarKsnG_yD@topsy.db.elephantsql.com/kcsamhgt villan-api
+```
