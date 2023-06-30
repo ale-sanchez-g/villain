@@ -7,7 +7,7 @@ The purpose of the villain API is to provide users and score functionality. The 
 
 ## Requirements
 
-- node 17x or above
+- node 20x or above
 - postgres
 - ElephantSQL postgress account
 - Sendgrid account

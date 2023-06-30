@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:20
 
 # Make privillage
 COPY --from=vsc32538.live.dynatrace.com/linux/oneagent-codemodules:nodejs / /
