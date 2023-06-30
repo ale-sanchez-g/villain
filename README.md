@@ -10,8 +10,6 @@ The purpose of the villain API is to provide users and score functionality. The 
 - node 10x or above
 - postgres
 - ElephantSQL postgress account
-- Heroku account
-- Shippable account
 
 ## Get started
 
