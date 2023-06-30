@@ -97,5 +97,5 @@ Run application with docker
 
 ```
 docker build -t villan-api:latest .
-docker run -p 3000:3000 -e SENDGRID_API_KEY=off -e NODE_ENV=production -e ELEPHANT_URL=postgres://kcsamhgt:JxyFVrkWWRpUxTjuzlB-r_VarKsnG_yD@topsy.db.elephantsql.com/kcsamhgt villan-api
+docker run -p 3000:3000 -e SENDGRID_API_KEY=off -e NODE_ENV=production -e ELEPHANT_URL=<GET-FROM-APP> villan-api
 ```
