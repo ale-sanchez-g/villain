@@ -12,7 +12,6 @@ The purpose of the villain API is to provide users and score functionality. The 
 - ElephantSQL postgress account
 - Sendgrid account
 
-
 ## Get started
 
 ### Postgres installation
