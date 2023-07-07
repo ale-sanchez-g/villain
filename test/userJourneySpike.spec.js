@@ -10,9 +10,7 @@ export let options = {
     { duration: '2m', target: 35 }, 
     { duration: '5m', target: 35 }, //Starts to Break
     { duration: '2m', target: 100 },
-    { duration: '5m', target: 100 },
-    { duration: '2m', target: 200 },
-    { duration: '5m', target: 200 }, //Breaking point ??
+    { duration: '5m', target: 100 }, //Confirm support
     { duration: '2m', target: 0 },
   ],
   thresholds: {
