@@ -7,7 +7,7 @@ The purpose of the villain API is to provide users and score functionality. The 
 
 ## Requirements
 
-- node 20x or above
+- node 19x due to Dyna support
 - postgres
 - ElephantSQL postgress account
 - Sendgrid account

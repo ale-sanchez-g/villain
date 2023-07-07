@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: [19.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -25,7 +25,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: mkdir -p testResults
-    - run: NODE_ENV=production SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }} ELEPHANT_URL=${{ secrets.ELEPHANT_URL_TEST}} PORT=3000 npm start & sleep 10
+    - run: NODE_ENV=production SENDGRID_API_KEY=off ELEPHANT_URL=${{ secrets.ELEPHANT_URL_TEST}} PORT=3000 npm start & sleep 10
     - run: node_modules/.bin/newman run test/COVID19_the_game_villain.postman_collection.json --env-var url=http://localhost:3000 -r cli,htmlextra --reporter-htmlextra-export testResults/htmlreport.html
 
     # Upload the contents of Test Results directory to workspace
