@@ -7,7 +7,7 @@ The purpose of the villain API is to provide users and score functionality. The 
 
 ## Requirements
 
-- node 17x or above
+- node 19x due to Dyna support
 - postgres
 - ElephantSQL postgress account
 - Sendgrid account
@@ -96,5 +96,5 @@ Run application with docker
 
 ```
 docker build -t villan-api:latest .
-docker run -p 3000:3000 -e SENDGRID_API_KEY=off -e NODE_ENV=production -e ELEPHANT_URL=postgres://kcsamhgt:JxyFVrkWWRpUxTjuzlB-r_VarKsnG_yD@topsy.db.elephantsql.com/kcsamhgt villan-api
+docker run -p 3000:3000 -e SENDGRID_API_KEY=off -e NODE_ENV=production -e ELEPHANT_URL=<GET-FROM-APP> villan-api
 ```

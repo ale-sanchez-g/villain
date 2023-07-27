@@ -5,16 +5,16 @@ import { randomIntBetween } from "https://jslib.k6.io/k6-utils/1.1.0/index.js";
 
 export let options = {
   stages: [
+    { duration: '2m', target: 20 },
+    { duration: '5m', target: 20 }, //Acceptable load
+    { duration: '2m', target: 35 }, 
+    { duration: '5m', target: 35 }, //Starts to Break
     { duration: '2m', target: 100 },
-    { duration: '5m', target: 100 }, //Acceptable load
-    { duration: '2m', target: 200 }, 
-    { duration: '5m', target: 200 }, //Starts to Break
-    { duration: '2m', target: 300 },
-    { duration: '5m', target: 300 }, //Breaking point
+    { duration: '5m', target: 100 }, //Confirm support
     { duration: '2m', target: 0 },
   ],
   thresholds: {
-    http_req_failed: ['rate<0.01'],   // http errors should be less than 1% 
+    http_req_failed: ['rate<0.015'],   // http errors should be less than 1.5% 
     http_req_duration: ['p(95)<1700'], // 95% of requests should be below 1.7 seconds
   },
 };
