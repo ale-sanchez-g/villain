@@ -58,6 +58,23 @@ app.get("/health", function (req, res) {
   res.status(200).send(data);
 });
 
+// Endpoint to simulate a CPU intensive task
+app.get("/fibonacci/:number", function (req, res) {
+  const number = req.params.number;
+
+  const fibonacci = (num) => {
+    console.log(`Calculating fibonacci for ${num}`);
+    if (num <= 1) return 1;
+    return fibonacci(num - 1) + fibonacci(num - 2);
+  };
+
+  if (number < 0) {
+    res.status(400).send("Number must be positive");
+  } else {
+    res.status(200).send(fibonacci(number).toString());
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server running on port http://localhost:${port}`);
   console.log(`DB connected to ${process.env.ELEPHANT_URL}`);

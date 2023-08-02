@@ -95,6 +95,6 @@ Log into your account and get the URL from the instance
 Run application with docker
 
 ```
-docker build -t villan-api:latest .
-docker run -p 3000:3000 -e SENDGRID_API_KEY=off -e NODE_ENV=production -e ELEPHANT_URL=<GET-FROM-APP> villan-api
+docker build --build-arg DT_PAAS_TOKEN=${DT_PAAS_TOKEN} -t villan-api:latest .
+docker run -p 3000:3000 -e SENDGRID_API_KEY=off -e NODE_ENV=production -e ELEPHANT_URL=${ELEPHANT_URL} villan-api
 ```
