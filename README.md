@@ -98,3 +98,18 @@ Run application with docker
 docker build --build-arg DT_PAAS_TOKEN=${DT_PAAS_TOKEN} -t villan-api:latest .
 docker run -p 3000:3000 -e SENDGRID_API_KEY=off -e NODE_ENV=production -e ELEPHANT_URL=${ELEPHANT_URL} villan-api
 ```
+
+## Heroku
+
+We use Heroku to host our application.
+
+To deploy to Heroku you need to have an account and be added to the project.
+
+To deploy to Heroku you need to have the Heroku CLI installed.
+
+``` 
+heroku login
+heroku container:login
+heroku container:push web -a supervillan
+heroku container:release web -a supervillan
+```

@@ -99,9 +99,9 @@ const updateUser = (request, response) => {
                   response
                     .status(201)
                     .json({
-                      status: "success",
-                      message: `User ${username} added with updated score`,
-                    });
+                    status: "success",
+                    message: `User ${username} added with updated score`,
+                  });
                   console.log(`user ${username} added with updated score`);
                 }
               );

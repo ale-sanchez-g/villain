@@ -10,7 +10,7 @@ let swaggerUi = require("swagger-ui-express"),
 const app = express();
 
 // Default Port 3000 unless specified at start
-const port = process.argv.slice(2)[0] || 3000;
+const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -53,6 +53,7 @@ app.get("/health", function (req, res) {
     uptime: process.uptime(),
     message: "Ok",
     date: new Date(),
+    db: controllers.dbStatus(),
   };
 
   res.status(200).send(data);
@@ -77,5 +78,4 @@ app.get("/fibonacci/:number", function (req, res) {
 
 app.listen(port, () => {
   console.log(`Server running on port http://localhost:${port}`);
-  console.log(`DB connected to ${process.env.ELEPHANT_URL}`);
 });
