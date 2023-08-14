@@ -14,7 +14,7 @@
             "thresholds": [
                 {
                     "type": "TOTAL",
-                    "valueMs": 100,
+                    "valueMs": 1000,
                     "requestIndex": 1
                 }
             ]

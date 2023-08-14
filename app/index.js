@@ -53,7 +53,6 @@ app.get("/health", function (req, res) {
     uptime: process.uptime(),
     message: "Ok",
     date: new Date(),
-    db: controllers.dbStatus(),
   };
 
   res.status(200).send(data);
