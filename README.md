@@ -3,6 +3,7 @@
 The purpose of the villain API is to provide users and score functionality. The API is run on nodejs express hosted in Heroku and connects to an ElephantSQL postgress DB.
 
 #### Badges
+
 <img src="http://online.swagger.io/validator?url=https://raw.githubusercontent.com/ale-sanchez-g/villain/master/app/swagger/openapi.json"> [Swagger Docs](http://supervillain.herokuapp.com/api-docs/)
 
 ## Requirements
@@ -40,12 +41,15 @@ open your terminal and follow the below steps
 - set `SENDGRID_API_KEY` with your SENDGRID API KEY, or you can set it to `off` so the function to send emails is not called
 - run `npm start` or `node app/index.js $PORT`
 - example:
+
 ```
 SENDGRID_API_KEY=off ELEPHANT_URL=postgresql://postgres@localhost:5432/postgres  npm start
 ```
+
 - Navigate to <http:localhoat:3000/api-docs> to view the swagger documentaiton of the API
 
 to run in production
+
 ```
 NODE_ENV=productino SENDGRID_API_KEY=<enterKEY> ELEPHANT_URL=<enterPostgressUrl> npm start
 ```
@@ -88,7 +92,7 @@ Current account for this project is under creation.
 
 We use the free tier of ElephantSQL to host our database. To get access to the database you need to register.
 
-Log into your account and get the URL from the instance 
+Log into your account and get the URL from the instance
 
 ## Docker
 
@@ -96,7 +100,9 @@ Run application with docker
 
 ```
 docker build --build-arg DT_PAAS_TOKEN=${DT_PAAS_TOKEN} -t villan-api:latest .
-docker run -p 3000:3000 -e SENDGRID_API_KEY=off -e NODE_ENV=production -e ELEPHANT_URL=${ELEPHANT_URL} villan-api
+docker build --build-arg DT_PAAS_TOKEN=${DT_PAAS_TOKEN} -t villan-api:arm . -f Dockerfile.m2
+
+docker run -p 3000:3000 -e SENDGRID_API_KEY=off -e NODE_ENV=production -e ELEPHANT_URL=${ELEPHANT_URL} villan-api:arm
 ```
 
 ## Heroku
@@ -107,7 +113,7 @@ To deploy to Heroku you need to have an account and be added to the project.
 
 To deploy to Heroku you need to have the Heroku CLI installed.
 
-``` 
+```
 heroku login
 heroku container:login
 heroku container:push web -a supervillan
