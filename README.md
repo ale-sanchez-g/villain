@@ -130,8 +130,9 @@ To deploy to Heroku you need to have an account and be added to the project.
 To deploy to Heroku you need to have the Heroku CLI installed. Refer to https://devcenter.heroku.com/articles/heroku-cli
 
 ```bash
+source .env
 heroku login
 heroku container:login
-heroku container:push web -a supervillan
+heroku container:push web --arg DT_PAAS_TOKEN=${DT_PAAS_TOKEN} -a supervillan
 heroku container:release web -a supervillan
 ```
