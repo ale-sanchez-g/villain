@@ -96,13 +96,29 @@ Log into your account and get the URL from the instance
 
 ## Docker
 
-Run application with docker
+Ensure you have requested the `.env` file with the relevant keys and run the below commands
 
+```bash
+source .env
 ```
-docker build --build-arg DT_PAAS_TOKEN=${DT_PAAS_TOKEN} -t villan-api:latest .
-docker build --build-arg DT_PAAS_TOKEN=${DT_PAAS_TOKEN} -t villan-api:arm . -f Dockerfile.m2
 
-docker run -p 3000:3000 -e SENDGRID_API_KEY=off -e NODE_ENV=production -e ELEPHANT_URL=${ELEPHANT_URL} villan-api:arm
+Build application base on the architecture
+
+```bash
+docker build --build-arg DT_PAAS_TOKEN=${DT_PAAS_TOKEN} -t villan-api:latest .
+```
+or
+```bash
+docker build --build-arg DT_PAAS_TOKEN=${DT_PAAS_TOKEN} -t villan-api:arm . -f Dockerfile.m2
+```
+
+Run Image with the below command
+```bash
+docker run -p 3000:3000 -e SENDGRID_API_KEY=${SENDGRID_API_KEY} -e NODE_ENV=production -e ELEPHANT_URL=${ELEPHANT_URL} villan-api:arm
+```
+or
+```bash
+docker run -p 3000:3000 -e SENDGRID_API_KEY=${SENDGRID_API_KEY} -e NODE_ENV=production -e ELEPHANT_URL=${ELEPHANT_URL} villan-api:latest
 ```
 
 ## Heroku
@@ -111,9 +127,9 @@ We use Heroku to host our application.
 
 To deploy to Heroku you need to have an account and be added to the project.
 
-To deploy to Heroku you need to have the Heroku CLI installed.
+To deploy to Heroku you need to have the Heroku CLI installed. Refer to https://devcenter.heroku.com/articles/heroku-cli
 
-```
+```bash
 heroku login
 heroku container:login
 heroku container:push web -a supervillan
