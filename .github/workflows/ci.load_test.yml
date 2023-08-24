@@ -3,15 +3,11 @@
 name: k6 Load Test
 on:
   push:
-    branches: [ master ]
+    branches: [ feature/dynatrace ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      DT_API_URL: https://vsc32538.live.dynatrace.com/api
-      DT_ONEAGENT_TECHNOLOGY: nodejs
-      DT_PAAS_TOKEN: ${{ secrets.DT_PAAS_TOKEN }}
 
     steps:
       - name: Checkout
@@ -25,7 +21,5 @@ jobs:
         uses: actions/setup-node@v2
       - run: npm install
       - run: |
-          mkdir -p /opt/dynatrace/oneagent && ARCHIVE=$(mktemp) && wget -O $ARCHIVE "$DT_API_URL/v1/deployment/installer/agent/unix/paas/latest?Api-Token=$DT_PAAS_TOKEN&flavor=default&arch=arm&include=$DT_ONEAGENT_TECHNOLOGY" && unzip -o -d /opt/dynatrace/oneagent $ARCHIVE && rm -f $ARCHIVE
-          NODE_ENV=production SENDGRID_API_KEY=off ELEPHANT_URL=off PORT=3000 npm start > output.log & npx wait-on http://localhost:3000
-          ./k6 run --quiet -e MY_HOSTNAME=http://localhost:3000 test/userJourneyLoad.spec.js
-          ./k6 run --quiet -e MY_HOSTNAME=http://localhost:3000 test/cleanup.spec.js
+          ./k6 run --quiet -e MY_HOSTNAME=https://supervillan-81ce46d107ff.herokuapp.com test/userJourneyLoad.spec.js
+          ./k6 run --quiet -e MY_HOSTNAME=https://supervillan-81ce46d107ff.herokuapp.com test/cleanup.spec.js
