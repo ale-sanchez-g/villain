@@ -111,20 +111,20 @@ source .env
 Build application base on the architecture
 
 ```bash
-docker build --build-arg DT_PAAS_TOKEN=${DT_PAAS_TOKEN} -t villan-api:latest .
+docker build --build-arg DT_PAAS_TOKEN=${DT_PAAS_TOKEN} -t morsisdivine/villan-api:latest .
 ```
 or
 ```bash
-docker build --build-arg DT_PAAS_TOKEN=${DT_PAAS_TOKEN} -t villan-api:arm . -f Dockerfile.m2
+docker build --build-arg DT_PAAS_TOKEN=${DT_PAAS_TOKEN} -t morsisdivine/villan-api:arm . -f Dockerfile.m2
 ```
 
 Run Image with the below command
 ```bash
-docker run -p 3000:3000 -e SENDGRID_API_KEY=${SENDGRID_API_KEY} -e NODE_ENV=production -e ELEPHANT_URL=${ELEPHANT_URL} villan-api:arm
+docker run -p 3000:3000 -e SENDGRID_API_KEY=${SENDGRID_API_KEY} -e NODE_ENV=production -e ELEPHANT_URL=${ELEPHANT_URL} morsisdivine/villan-api:arm
 ```
 or
 ```bash
-docker run -p 3000:3000 -e SENDGRID_API_KEY=${SENDGRID_API_KEY} -e NODE_ENV=production -e ELEPHANT_URL=${ELEPHANT_URL} villan-api:latest
+docker run -p 3000:3000 -e SENDGRID_API_KEY=${SENDGRID_API_KEY} -e NODE_ENV=production -e ELEPHANT_URL=${ELEPHANT_URL} morsisdivine/villan-api:latest
 ```
 
 ## Heroku
