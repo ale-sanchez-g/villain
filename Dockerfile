@@ -1,4 +1,4 @@
-FROM --platform=linux/x86_64 node:19
+FROM --platform=linux/x86_64 node:20
 
 # #Set up Dynatrce for X86
 ENV DT_API_URL=https://vsc32538.live.dynatrace.com/api
