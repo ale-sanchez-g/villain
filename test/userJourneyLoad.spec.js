@@ -16,12 +16,15 @@ export let options = {
   },
 };
 
-export default function () {
-  let token = getToken();
+export function setup() {
+  return {id: getToken()};
+}
+
+export default function (token) {
   let params = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: token,
+      Authorization: token.id,
     },
   };
 
@@ -74,7 +77,7 @@ function getToken() {
     key: r,
     email: `${r}@yopmail.com`,
     returnKey: true,
-    expiresIn: "2 days",
+    expiresIn: "1 day",
   });
   let authres = http.post(
     `${__ENV.MY_HOSTNAME}/auth/gentoken`,
