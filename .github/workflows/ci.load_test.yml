@@ -1,9 +1,11 @@
 # .github/workflows/load-test.yml
 
-name: k6 Load Test
+name: Load Test
 on:
   push:
-    branches: [ feature/dynatrace ]
+    branches: [ feature/observability, master ]
+  schedule: 
+      - cron: '0 */6 * * *'
 
 jobs:
   build:
@@ -13,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Install k6
+      - name: Install Tools
         run: |
           curl https://github.com/loadimpact/k6/releases/download/v0.26.2/k6-v0.26.2-linux64.tar.gz -L | tar xvz --strip-components 1
 

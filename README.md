@@ -113,16 +113,21 @@ Build application base on the architecture
 ```bash
 docker build --build-arg DT_PAAS_TOKEN=${DT_PAAS_TOKEN} -t morsisdivine/villan-api:latest .
 ```
+
 or
+
 ```bash
 docker build --build-arg DT_PAAS_TOKEN=${DT_PAAS_TOKEN} -t morsisdivine/villan-api:arm . -f Dockerfile.m2
 ```
 
 Run Image with the below command
+
 ```bash
 docker run -p 3000:3000 -e SENDGRID_API_KEY=${SENDGRID_API_KEY} -e NODE_ENV=production -e ELEPHANT_URL=${ELEPHANT_URL} morsisdivine/villan-api:arm
 ```
+
 or
+
 ```bash
 docker run -p 3000:3000 -e SENDGRID_API_KEY=${SENDGRID_API_KEY} -e NODE_ENV=production -e ELEPHANT_URL=${ELEPHANT_URL} morsisdivine/villan-api:latest
 ```
@@ -142,3 +147,26 @@ heroku container:login
 heroku container:push web --arg DT_PAAS_TOKEN=${DT_PAAS_TOKEN} -a supervillan
 heroku container:release web -a supervillan
 ```
+
+
+### TODO - Kubernetes
+
+minikube start
+minikube dashboard
+
+kubectl create namespace dynatrace
+kubectl apply -f https://github.com/Dynatrace/dynatrace-operator/releases/download/v0.12.1/kubernetes.yaml
+kubectl -n dynatrace wait pod --for=condition=ready --selector=app.kubernetes.io/name=dynatrace-operator,app.kubernetes.io/component=webhook --timeout=300s
+kubectl apply -f dynakube.yaml
+
+kubectl proxy
+
+kubectl create deployment villan --image=morsisdivine/villan-api:latest
+export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')
+echo Name of the Pod: $POD_NAME
+
+http://localhost:8001/api/v1/namespaces/default/pods/villan-7bfd456f45-x6mx6:3000/proxy/health
+
+kubectl rollout restart -n default deployment villan
+
+kubectl delete deployment villan
