@@ -4,6 +4,9 @@ cypress/
 cypress.json
 test/
 
+# Do not load Observability to image
+observability/
+
 # Dont load actions
 .githab/
 

@@ -169,6 +169,7 @@ function sendMail(email, tokenKey) {
       html: `Congratulations your application is register and the tokeKey is <strong>${tokenKey}</strong>`,
     };
     sgMail.send(msg);
+    console.log(`Email sent to ${email}`);
   }
 }
 

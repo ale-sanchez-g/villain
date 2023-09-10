@@ -1,0 +1,10 @@
+FROM alpine:latest AS basearm
+RUN echo "base"
+
+FROM --platform=linux/x86_64 alpine:latest as basex86
+
+FROM basearm AS stage1
+RUN echo "stage1"
+
+FROM basex86 AS stage2
+RUN echo "stage2"

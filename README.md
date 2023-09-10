@@ -3,6 +3,7 @@
 The purpose of the villain API is to provide users and score functionality. The API is run on nodejs express hosted in Heroku and connects to an ElephantSQL postgress DB.
 
 #### Badges
+
 <img src="http://online.swagger.io/validator?url=https://raw.githubusercontent.com/ale-sanchez-g/villain/master/app/swagger/openapi.json"> [Swagger Docs](http://supervillain.herokuapp.com/api-docs/)
 
 ## Requirements
@@ -40,12 +41,15 @@ open your terminal and follow the below steps
 - set `SENDGRID_API_KEY` with your SENDGRID API KEY, or you can set it to `off` so the function to send emails is not called
 - run `npm start` or `node app/index.js $PORT`
 - example:
+
 ```
 SENDGRID_API_KEY=off ELEPHANT_URL=postgresql://postgres@localhost:5432/postgres  npm start
 ```
+
 - Navigate to <http:localhoat:3000/api-docs> to view the swagger documentaiton of the API
 
 to run in production
+
 ```
 NODE_ENV=productino SENDGRID_API_KEY=<enterKEY> ELEPHANT_URL=<enterPostgressUrl> npm start
 ```
@@ -66,7 +70,13 @@ We have set up 4 test to validate the performance of the API.
 - Load (userJourneyLoad.spec.js)
 - Spike (userJourneySpike.spec.js)
 
-You can run the above by running `k6 run userJourneyLoad.spec.js` or by updating the ci.load_test.yml file with the name of the branch you can test run the load test.
+You can run the above by running
+
+```bash
+MY_HOSTNAME=https://supervillan-81ce46d107ff.herokuapp.com k6 run test/userJourneyLoad.spec.js
+```
+
+or by updating the ci.load_test.yml file with the name of the branch you can test run the load test.
 
 If you are making major changes to the DB queries or changes to the DB, we recommend you run the load test to validate the performance of the API.
 
@@ -88,13 +98,75 @@ Current account for this project is under creation.
 
 We use the free tier of ElephantSQL to host our database. To get access to the database you need to register.
 
-Log into your account and get the URL from the instance 
+Log into your account and get the URL from the instance
 
 ## Docker
 
-Run application with docker
+Ensure you have requested the `.env` file with the relevant keys and run the below commands
 
+```bash
+source .env
 ```
-docker build -t villan-api:latest .
-docker run -p 3000:3000 -e SENDGRID_API_KEY=off -e NODE_ENV=production -e ELEPHANT_URL=<GET-FROM-APP> villan-api
+
+Build application base on the architecture
+
+```bash
+docker build --build-arg DT_PAAS_TOKEN=${DT_PAAS_TOKEN} -t morsisdivine/villan-api:latest .
 ```
+
+or
+
+```bash
+docker build --build-arg DT_PAAS_TOKEN=${DT_PAAS_TOKEN} -t morsisdivine/villan-api:arm . -f Dockerfile.m2
+```
+
+Run Image with the below command
+
+```bash
+docker run -p 3000:3000 -e SENDGRID_API_KEY=${SENDGRID_API_KEY} -e NODE_ENV=production -e ELEPHANT_URL=${ELEPHANT_URL} morsisdivine/villan-api:arm
+```
+
+or
+
+```bash
+docker run -p 3000:3000 -e SENDGRID_API_KEY=${SENDGRID_API_KEY} -e NODE_ENV=production -e ELEPHANT_URL=${ELEPHANT_URL} morsisdivine/villan-api:latest
+```
+
+## Heroku
+
+We use Heroku to host our application.
+
+To deploy to Heroku you need to have an account and be added to the project.
+
+To deploy to Heroku you need to have the Heroku CLI installed. Refer to https://devcenter.heroku.com/articles/heroku-cli
+
+```bash
+source .env
+heroku login
+heroku container:login
+heroku container:push web --arg DT_PAAS_TOKEN=${DT_PAAS_TOKEN} -a supervillan
+heroku container:release web -a supervillan
+```
+
+
+### TODO - Kubernetes
+
+minikube start
+minikube dashboard
+
+kubectl create namespace dynatrace
+kubectl apply -f https://github.com/Dynatrace/dynatrace-operator/releases/download/v0.12.1/kubernetes.yaml
+kubectl -n dynatrace wait pod --for=condition=ready --selector=app.kubernetes.io/name=dynatrace-operator,app.kubernetes.io/component=webhook --timeout=300s
+kubectl apply -f dynakube.yaml
+
+kubectl proxy
+
+kubectl create deployment villan --image=morsisdivine/villan-api:latest
+export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')
+echo Name of the Pod: $POD_NAME
+
+http://localhost:8001/api/v1/namespaces/default/pods/villan-7bfd456f45-x6mx6:3000/proxy/health
+
+kubectl rollout restart -n default deployment villan
+
+kubectl delete deployment villan
