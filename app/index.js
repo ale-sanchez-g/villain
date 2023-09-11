@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+let os = require('os');
 let controllers = require("./controller/sql");
 let auth = require("./controller/auth");
 
@@ -53,6 +54,7 @@ app.get("/health", function (req, res) {
     uptime: process.uptime(),
     message: "Ok",
     date: new Date(),
+    cpu: os.cpus(),
   };
 
   res.status(200).send(data);

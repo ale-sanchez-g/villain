@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:19
 
 # #Set up Dynatrce for ARM
 ENV DT_API_URL=https://vsc32538.live.dynatrace.com/api
