@@ -43,7 +43,8 @@ open your terminal and follow the below steps
 - example:
 
 ```
-SENDGRID_API_KEY=off ELEPHANT_URL=postgresql://postgres@localhost:5432/postgres  npm start
+source .env
+SENDGRID_API_KEY=off ELEPHANT_URL=${ELEPHANT_URL}  npm start
 ```
 
 - Navigate to <http:localhoat:3000/api-docs> to view the swagger documentaiton of the API
