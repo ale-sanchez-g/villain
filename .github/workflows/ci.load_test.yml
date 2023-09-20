@@ -3,7 +3,7 @@
 name: Load Test
 on:
   push:
-    branches: [ master ]
+    branches: [ masterPaused ]
   schedule: 
       - cron: '0 */6 * * *'
 
