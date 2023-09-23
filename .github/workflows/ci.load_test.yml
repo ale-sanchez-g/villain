@@ -3,9 +3,7 @@
 name: Load Test
 on:
   push:
-    branches: [ masterPaused ]
-  schedule: 
-      - cron: '0 */6 * * *'
+    branches: [ master ]
 
 jobs:
   build:
