@@ -4,7 +4,7 @@
   "description": "covid19 game villain",
   "main": "index.js",
   "engines": {
-    "node": "20.x"
+    "node": "19.x"
   },
   "scripts": {
     "start": "node app/index.js $PORT",
