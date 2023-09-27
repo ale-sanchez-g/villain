@@ -361,3 +361,6 @@ cypress/videos/
 
 # Environment
 .env
+
+#  Java project
+restassured/target/
