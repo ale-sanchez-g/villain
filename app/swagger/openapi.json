@@ -690,7 +690,7 @@
             "content": {
               "text/html": {
                 "schema": {
-                  "$ref": "#/components/schemas/textError"
+                  "$ref": "#/components/schemas/textResponse"
                 }
               }
             }
@@ -701,7 +701,7 @@
   },
   "components": {
     "schemas": {
-      "textError": {
+      "textResponse": {
         "type": "string",
         "example": "1"
       }
