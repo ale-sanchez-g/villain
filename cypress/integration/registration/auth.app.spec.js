@@ -39,4 +39,27 @@ describe("API tests", () => {
       });
     });
   });
+
+  it('should register a new user using auth token', () => {
+    const username = faker.internet.userName();
+    const password = faker.internet.password();
+
+    cy.wrap(authToken).then(token => {
+      cy.request({
+        method: 'POST',
+        url: '/auth/user/register',
+        headers: {
+          'Authorization': `${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: {
+          "username": username,
+          "password": password
+        }
+      }).then(response => {
+        expect(response.status).to.eq(200);
+      });
+    });
+  });
+
 });
