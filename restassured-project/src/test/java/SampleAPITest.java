@@ -15,7 +15,10 @@ public class SampleAPITest {
     @BeforeAll
     public static void generateToken() {
         // Set the base URI
-        RestAssured.baseURI = "https://azurevillan.greenmeadow-20cb8861.australiaeast.azurecontainerapps.io";
+        // RestAssured.baseURI =
+        // "https://azurevillan.greenmeadow-20cb8861.australiaeast.azurecontainerapps.io";
+        // Set Localhost
+        RestAssured.baseURI = "http://localhost:3000";
 
         // Generate random username and email
         var key = faker.name().username();
@@ -69,6 +72,7 @@ public class SampleAPITest {
         class InnerTestSuite {
             private static String username;
             private static String password;
+
             @BeforeAll
             public static void generateUsernamePassword() {
                 username = faker.name().username();
