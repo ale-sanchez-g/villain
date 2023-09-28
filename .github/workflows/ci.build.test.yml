@@ -8,39 +8,48 @@ on:
     branches: [ master ]
 
 jobs:
+  
   build:
-
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [19.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js 19.x
       uses: actions/setup-node@v2
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: '19.x'
     - run: npm install
-    - run: mkdir -p testResults
     - run: NODE_ENV=production SENDGRID_API_KEY=off ELEPHANT_URL=${{ secrets.ELEPHANT_URL_TEST}} PORT=3000 npm start & sleep 10
-    - run: node_modules/.bin/newman run test/COVID19_the_game_villain.postman_collection.json --env-var url=http://localhost:3000 -r cli,htmlextra --reporter-htmlextra-export testResults/htmlreport.html
-    - run: npx cypress run
-
+  
+  node-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '19.x'
+    - run: | 
+        npm install
+        mkdir -p testResults
+        node_modules/.bin/newman run test/COVID19_the_game_villain.postman_collection.json --env-var url=http://localhost:3000 -r cli,htmlextra --reporter-htmlextra-export testResults/htmlreport.html  
+    
     # Upload the contents of Test Results directory to workspace
     - name: Output the run Details
       uses: actions/upload-artifact@v2
       with: 
        name: RunReports
        path: testResults
+  
+  java-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
 
     # Run Java restAssure test
     - name: Run Java restAssure test
       uses: actions/setup-java@v1
       with:
         java-version: '11'
-    - run: cd restassured-project
-    - run: mvn clean test
-    
+    - run: | 
+        cd restassured-project
+        mvn clean test
