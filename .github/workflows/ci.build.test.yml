@@ -22,7 +22,7 @@ jobs:
             NODE_ENV=production SENDGRID_API_KEY=off ELEPHANT_URL=${{ secrets.ELEPHANT_URL_TEST}} PORT=3000 npm start & sleep 10
     - run: | 
         mkdir -p testResults
-        node_modules/.bin/newman run test/COVID19_the_game_villain.postman_collection.json --env-var url=http://localhost:3000 -r cli,htmlextra --reporter-htmlextra-export testResults/htmlreport.html  
+        node_modules/.bin/newman run test/COVID19_the_game_villain.postman_collection.json --env-var url=http://0.0.0.0:3000 -r cli,htmlextra --reporter-htmlextra-export testResults/htmlreport.html  
     
     # Upload the contents of Test Results directory to workspace
     - name: Output the run Details
