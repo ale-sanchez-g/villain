@@ -4,7 +4,7 @@
   "description": "covid19 game villain",
   "main": "index.js",
   "engines": {
-    "node": "19.x"
+    "node": "20.x"
   },
   "scripts": {
     "start": "node app/index.js $PORT",
@@ -32,15 +32,15 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.3",
-    "jsonwebtoken": "^8.5.1",
-    "newman-reporter-htmlextra": "^1.22.11",
-    "nodemon": "^2.0.20",
+    "jsonwebtoken": "^9.0.2",
+    "newman-reporter-htmlextra": "^1.20.1",
+    "nodemon": "^3.0.1",
     "pg": "^8.0.3",
     "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.9.12",
-    "cypress": "^9.4.1",
-    "newman": "^5.0.0"
+    "cypress": "^13.3.1",
+    "newman": "^6.0.0"
   }
 }
