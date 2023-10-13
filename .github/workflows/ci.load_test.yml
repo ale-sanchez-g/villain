@@ -4,8 +4,6 @@ name: Load Test
 on:
   push:
     branches: [ master ]
-  schedule: 
-      - cron: '0 */6 * * *'
 
 jobs:
   build:
@@ -21,7 +19,7 @@ jobs:
 
       - name: Install and run
         uses: actions/setup-node@v2
-      - run: npm install
+      - run: npm install --legacy-peer-deps
       - run: |
           ./k6 run --quiet -e MY_HOSTNAME=https://supervillan-81ce46d107ff.herokuapp.com test/userJourneyLoad.spec.js
           ./k6 run --quiet -e MY_HOSTNAME=https://supervillan-81ce46d107ff.herokuapp.com test/cleanup.spec.js

@@ -42,16 +42,18 @@ open your terminal and follow the below steps
 - run `npm start` or `node app/index.js $PORT`
 - example:
 
-```
-SENDGRID_API_KEY=off ELEPHANT_URL=postgresql://postgres@localhost:5432/postgres  npm start
+```bash
+source .env
+SENDGRID_API_KEY=off ELEPHANT_URL=${ELEPHANT_URL} npm start
 ```
 
 - Navigate to <http:localhoat:3000/api-docs> to view the swagger documentaiton of the API
 
 to run in production
 
-```
-NODE_ENV=productino SENDGRID_API_KEY=<enterKEY> ELEPHANT_URL=<enterPostgressUrl> npm start
+```bash
+srouce .env
+NODE_ENV=production SENDGRID_API_KEY=${SENDGRID_API_KEY} ELEPHANT_URL=${ELEPHANT_URL} npm start
 ```
 
 ## Test

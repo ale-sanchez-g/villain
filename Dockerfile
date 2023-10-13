@@ -6,8 +6,7 @@ ENV DT_ONEAGENT_TECHNOLOGY=nodejs
 ENV ARCHITECTURE=x86
 ARG DT_PAAS_TOKEN
 
-
-
+RUN apt-get update && apt-get install -y --no-install-recommends openssh-client && rm -rf /var/lib/apt/lists/*
 RUN mkdir -p /opt/dynatrace/oneagent && ARCHIVE=$(mktemp) && wget -O $ARCHIVE "$DT_API_URL/v1/deployment/installer/agent/unix/paas/latest?Api-Token=$DT_PAAS_TOKEN&flavor=default&arch=$ARCHITECTURE&include=$DT_ONEAGENT_TECHNOLOGY" && unzip -o -d /opt/dynatrace/oneagent $ARCHIVE && rm -f $ARCHIVE
 ENV LD_PRELOAD /opt/dynatrace/oneagent/agent/lib64/liboneagentproc.so
 
@@ -15,7 +14,7 @@ ENV LD_PRELOAD /opt/dynatrace/oneagent/agent/lib64/liboneagentproc.so
 RUN mkdir /api
 WORKDIR /api
 ADD . /api
-RUN npm install --omit=dev
+RUN npm install --omit=dev --legacy-peer-deps
 ENV NODE_ENV=production
 
 # Run the app.

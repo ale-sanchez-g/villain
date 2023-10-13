@@ -32,9 +32,9 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.3",
-    "jsonwebtoken": "^8.5.1",
-    "newman-reporter-htmlextra": "^1.22.11",
-    "nodemon": "^2.0.20",
+    "jsonwebtoken": "^9.0.2",
+    "newman-reporter-htmlextra": "^1.20.1",
+    "nodemon": "^3.0.1",
     "pg": "^8.0.3",
     "swagger-ui-express": "^4.1.4"
   },
