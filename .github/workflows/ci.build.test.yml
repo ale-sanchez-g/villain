@@ -18,7 +18,7 @@ jobs:
       with:
         node-version: '20.x'
     - run: |
-            npm install
+            npm install --legacy-peer-deps 
             NODE_ENV=production SENDGRID_API_KEY=off ELEPHANT_URL=${{ secrets.ELEPHANT_URL_TEST}} PORT=3000 npm start & sleep 10
     - run: | 
         mkdir -p testResults
