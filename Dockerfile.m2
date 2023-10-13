@@ -14,7 +14,7 @@ ENV LD_PRELOAD /opt/dynatrace/oneagent/agent/lib64/liboneagentproc.so
 RUN mkdir /api
 WORKDIR /api
 ADD . /api
-RUN npm install --omit=dev
+RUN npm install --omit=dev --legacy-peer-deps
 ENV NODE_ENV=production
 
 # Run the app.
