@@ -172,3 +172,16 @@ http://localhost:8001/api/v1/namespaces/default/pods/villan-7bfd456f45-x6mx6:300
 kubectl rollout restart -n default deployment villan
 
 kubectl delete deployment villan
+
+
+## Postman to Jmeter
+
+Gloabl install of cpj
+
+example
+```bash
+npm i convert-postman-jmeter -g
+convert-postman-jmeter -p tes/postman_collection.json -j jmeter/jmeter_collection.jmx -e test/postman_environment.json
+```
+
+https://github.com/sercheo87/convert-postman-jmeter/issues

@@ -3,7 +3,8 @@
 		"_postman_id": "bcf44d95-e3eb-4148-ac9c-21c62da02905",
 		"name": "COVID19_the_game_villain",
 		"description": "This is a sample nodejs express server.\n\nContact Support:\n Name: COVID19 The gaes APIs Support\n Email: morisidivine@gmail.com",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2684003"
 	},
 	"item": [
 		{
@@ -31,6 +32,21 @@
 									"    pm.response.to.have.status(200);",
 									"    let payload = pm.response.json();",
 									"    pm.environment.set(\"token\", payload.token);",
+									"});",
+									"",
+									"pm.test(\"Response payload has the correct schema\", function () {",
+									"    var schema = {",
+									"        type: \"object\",",
+									"        properties: {",
+									"            token: { type: \"string\" },",
+									"            expiresIn: { type: \"string\" },",
+									"            emailTo: { type: \"string\" }",
+									"        },",
+									"        required: [\"token\", \"expiresIn\", \"emailTo\"]",
+									"    };",
+									"",
+									"    var response = pm.response.json();",
+									"    pm.expect(tv4.validate(response, schema)).to.be.true;",
 									"});"
 								],
 								"type": "text/javascript"
@@ -42,7 +58,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"key\": \"{{appname}}\",\n    \"email\": \"{{appname}}@yopmail.com\",\n    \"returnKey\": true,\n    \"expiresIn\": \"2 days\"\n}",
+							"raw": "{\n    \"key\": \"{{appname}}\",\n    \"email\": \"{{appname}}@yopmail.com\",\n    \"returnKey\": true,\n    \"expiresIn\": \"1 days\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -553,7 +569,7 @@
 					]
 				},
 				{
-					"name": "Update user score Copy",
+					"name": "Create score put",
 					"event": [
 						{
 							"listen": "test",
@@ -1206,9 +1222,26 @@
 			"item": [
 				{
 					"name": "Health check",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{url}}/health",
 							"host": [
@@ -1216,6 +1249,99 @@
 							],
 							"path": [
 								"health"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Health check",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/health",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"health"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"49-MRFZ8bsnYzZd7ZHgvBhrHakG8o0\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Apr 2022 11:36:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"uptime\": 240.447320247,\n    \"message\": \"Ok\",\n    \"date\": \"2022-04-18T11:36:34.792Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "cpu sim",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/fibonacci/:number",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"fibonacci",
+								":number"
+							],
+							"variable": [
+								{
+									"key": "number",
+									"value": "25"
+								}
 							]
 						}
 					},
