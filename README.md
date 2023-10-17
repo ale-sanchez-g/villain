@@ -181,7 +181,7 @@ Gloabl install of cpj
 example
 ```bash
 npm i convert-postman-jmeter -g
-convert-postman-jmeter -p tes/postman_collection.json -j jmeter/jmeter_collection.jmx -e test/postman_environment.json
+node_modules/.bin/convert-postman-jmeter -p test/COVID19_the_game_villain.postman_collection.json -j jmeter/jmeter_collection.jmx -e test/Local.postman_environment.json
 ```
 
 https://github.com/sercheo87/convert-postman-jmeter/issues
