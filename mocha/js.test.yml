@@ -1,0 +1,4 @@
+execution:
+  - executor: mocha
+    scenario:
+      script: api.test.js
