@@ -8,7 +8,7 @@ The purpose of the villain API is to provide users and score functionality. The 
 
 ## Requirements
 
-- node 19x due to Dyna support
+- node 20x due to Dyna support
 - postgres
 - ElephantSQL postgress account
 - Sendgrid account
@@ -36,7 +36,7 @@ open your terminal and follow the below steps
   - mac/linux run `sh setup/init.sh`
   - windows run `bash ./setup/init.sh`
     - NOTE: Also make sure your shell script is formatted with Unix style, or there can be errors.
-- run `npm install`
+- run `npm install --force`
 - set `ELEPHANT_URL` variable with the postgress URL of the instance that you what to use
 - set `SENDGRID_API_KEY` with your SENDGRID API KEY, or you can set it to `off` so the function to send emails is not called
 - run `npm start` or `node app/index.js $PORT`
@@ -44,7 +44,7 @@ open your terminal and follow the below steps
 
 ```bash
 source .env
-SENDGRID_API_KEY=off ELEPHANT_URL=${ELEPHANT_URL} npm start
+SENDGRID_API_KEY=off ELEPHANT_URL=${ELEPHANT_URL} npm start NODE_ENV=production
 ```
 
 - Navigate to <http:localhoat:3000/api-docs> to view the swagger documentaiton of the API

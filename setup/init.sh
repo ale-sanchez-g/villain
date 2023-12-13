@@ -1,8 +1,8 @@
 #!/bin/bash
 # -- Steps if postgres is not installed --
-# CREATE ROLE postgres superuser;
-# CREATE USER postgres; 
-# ALTER ROLE postgres WITH LOGIN;
+psql -c "CREATE ROLE postgres superuser;"
+psql -c "CREATE USER postgres; "
+psql -c "ALTER ROLE postgres WITH LOGIN;"
 
 
 psql -c "CREATE DATABASE users_api;" -U postgres
