@@ -134,6 +134,19 @@ or
 docker run -p 3000:3000 -e SENDGRID_API_KEY=${SENDGRID_API_KEY} -e NODE_ENV=production -e ELEPHANT_URL=${ELEPHANT_URL} morsisdivine/villan-api:latest
 ```
 
+## Obs - Dynatrace
+
+### Synthetics
+
+To run the Dynatrace synthetics you need to have a Dynatrace account and have the API token.
+Ensure you create the API read and wright access for all synthetics on API V1
+This will craete a new Synthetic, so only use to resotre back if deleted manually
+
+```bash
+export DT_API_TOKEN=${DT_API_TOKEN} 
+npm run dyna
+```
+
 ## Heroku
 
 We use Heroku to host our application.
@@ -149,7 +162,6 @@ heroku container:login
 heroku container:push web --arg DT_PAAS_TOKEN=${DT_PAAS_TOKEN} -a supervillan
 heroku container:release web -a supervillan
 ```
-
 
 ### TODO - Kubernetes
 
