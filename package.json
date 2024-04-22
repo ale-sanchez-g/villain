@@ -35,7 +35,7 @@
     "jsonwebtoken": "^9.0.2",
     "newman-reporter-htmlextra": "^1.23.1",
     "nodemon": "^3.0.1",
-    "pg": "^8.0.3",
+    "pg": "^8.11.4",
     "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
