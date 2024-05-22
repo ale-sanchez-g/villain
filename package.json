@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/ale-sanchez-g/villain#readme",
   "dependencies": {
-    "@sendgrid/mail": "^8.0.0",
+    "@sendgrid/mail": "^8.1.2",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.19.2",
