@@ -28,14 +28,14 @@
   },
   "homepage": "https://github.com/ale-sanchez-g/villain#readme",
   "dependencies": {
-    "@sendgrid/mail": "^8.0.0",
+    "@sendgrid/mail": "^8.1.2",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "newman-reporter-htmlextra": "^1.23.1",
     "nodemon": "^3.1.0",
-    "pg": "^8.0.3",
+    "pg": "^8.11.4",
     "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
