@@ -14,10 +14,18 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Close old PRs
+      id: close_prs
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         pr_list=$(gh pr list --state open --json number,createdAt --jq '.[] | select((now - (.createdAt | fromdateiso8601)) > (2 * 24 * 60 * 60)) | .number')
+        closed_prs=""
         for pr in $pr_list; do
           gh pr close $pr -c "Closing this PR as it has been open for more than 2 days."
+          closed_prs="$closed_prs $pr"
         done
+        echo "::set-output name=closed_prs::$closed_prs"
+
+    - name: Output closed PRs
+      run: |
+        echo "Closed PRs: ${{ steps.close_prs.outputs.closed_prs }}"
