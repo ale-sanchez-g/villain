@@ -19,6 +19,8 @@ jobs:
 
       - name: Install and run
         uses: actions/setup-node@v2
+        with:
+          node-version: '20.x'
       - run: npm install --legacy-peer-deps
       - run: |
           ./k6 run --quiet -e MY_HOSTNAME=https://supervillan-81ce46d107ff.herokuapp.com test/userJourneyLoad.spec.js

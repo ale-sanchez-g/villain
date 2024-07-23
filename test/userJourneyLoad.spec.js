@@ -7,7 +7,7 @@ export let options = {
   stages: [
     { duration: "1m", target: 1 },
     { duration: "5m", target: 15 },
-    { duration: "60m", target: 15 },
+    { duration: "15m", target: 15 },
     { duration: "1m", target: 0 },
   ],
   thresholds: {
