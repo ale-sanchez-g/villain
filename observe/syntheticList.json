@@ -1,22 +1,20 @@
-{
-    "monitors": [
-        {
-            "name": "Red Roo Menu",
-            "entityId": "SYNTHETIC_TEST-2CEBA8DC72CFD1C9",
-            "type": "BROWSER",
-            "enabled": true
-        },
-        {
-            "name": "WeatherAPI",
-            "entityId": "HTTP_CHECK-04382DCCEC262A15",
-            "type": "HTTP",
-            "enabled": true
-        },
-        {
-            "name": "mydealerhub Monitor test",
-            "entityId": "HTTP_CHECK-F240E2B7FE52E494",
-            "type": "HTTP",
-            "enabled": true
-        }
-    ]
-}
+[
+    {
+        "name": "GithubPage Calculator",
+        "entityId": "SYNTHETIC_TEST-5EC0C08020E249C7",
+        "type": "BROWSER",
+        "enabled": true
+    },
+    {
+        "name": "Devops1",
+        "entityId": "SYNTHETIC_TEST-193289F29CAF711C",
+        "type": "BROWSER",
+        "enabled": true
+    },
+    {
+        "name": "supervillan Monitor test",
+        "entityId": "HTTP_CHECK-676580390C0A9D4B",
+        "type": "HTTP",
+        "enabled": true
+    }
+]
