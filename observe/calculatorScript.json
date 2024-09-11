@@ -1,0 +1,99 @@
+{
+    "configuration": {
+        "chromiumStartupFlags": {
+            "disable-web-security": false
+        },
+        "javaScriptSettings": {},
+        "device": {
+            "orientation": "landscape",
+            "deviceName": "Desktop"
+        },
+        "useIESupportedAgent": true
+    },
+    "type": "clickpath",
+    "version": "1.0",
+    "events": [{
+        "type": "navigate",
+        "wait": {
+            "waitFor": "page_complete"
+        },
+        "description": "Loading of \"https://ale-sanchez-g.github.io/featureflags\"",
+        "url": "https://ale-sanchez-g.github.io/featureflags"
+    }, {
+        "type": "click",
+        "wait": {
+            "waitFor": "page_complete"
+        },
+        "target": {
+            "locators": [{
+                "type": "css",
+                "value": "button:eq(12)"
+            }, {
+                "type": "css",
+                "value": "button:contains(\"1\")"
+            }, {
+                "type": "css",
+                "value": "#root div div div div:nth-child(2) button:nth-child(13)"
+            }, {
+                "type": "css",
+                "value": "#root div div.App div.calculator div.buttons button:eq(12)"
+            }]
+        },
+        "button": 0,
+        "description": "click on \"1\""
+    }, {
+        "type": "click",
+        "wait": {
+            "waitFor": "page_complete"
+        },
+        "target": {
+            "locators": [{
+                "type": "css",
+                "value": "button:eq(7)"
+            }, {
+                "type": "css",
+                "value": "button:contains(\"+\")"
+            }, {
+                "type": "css",
+                "value": "#root div div.App div.calculator div.buttons button:eq(7)"
+            }]
+        },
+        "button": 0,
+        "description": "click on \"+\""
+    }, {
+        "type": "click",
+        "wait": {
+            "waitFor": "page_complete"
+        },
+        "target": {
+            "locators": [{
+                "type": "css",
+                "value": "button:eq(13)"
+            }, {
+                "type": "css",
+                "value": "button:contains(\"2\")"
+            }, {
+                "type": "css",
+                "value": "#root div div.App div.calculator div.buttons button:eq(13)"
+            }]
+        },
+        "button": 0,
+        "description": "click on \"2\""
+    }, {
+        "type": "click",
+        "target": {
+            "locators": [{
+                "type": "css",
+                "value": "button:contains(\"=\")"
+            }, {
+                "type": "css",
+                "value": "button:eq(11)"
+            }, {
+                "type": "css",
+                "value": "#root div div.App div.calculator div.buttons button:eq(11)"
+            }]
+        },
+        "button": 0,
+        "description": "click on \"=\""
+    }]
+}
