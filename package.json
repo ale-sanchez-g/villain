@@ -39,7 +39,7 @@
     "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
-    "@cypress/code-coverage": "^3.9.12",
+    "@cypress/code-coverage": "^4.0.3",
     "cypress": "^13.1.0",
     "faker": "^5.5.3",
     "newman": "^6.0.0"
